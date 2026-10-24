@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Laboratorio de la sesión 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1F3A5F; --ink: #1B2433; --muted: #5B6270; --rust: #8C4A22; --rust-l: #C8702A;
+  --paper: #F7F5F0; --line: #D9D3C7; --card: #FFFFFF; --user: #E6ECF3;
+  --red: #A8322D; --amber: #C98A1B; --green: #3E7B4F;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+header.top { background: var(--navy); color: #fff; padding: 28px 16px 32px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+header.top .wrap { padding: 0; }
+.brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.brand .logo { background: #fff; border-radius: 10px; padding: 6px 12px; display: inline-flex; }
+.brand img { height: 40px; display: block; }
+.eye { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; color: #E7A774; }
+h1 { font-family: Lora, serif; font-weight: 500; font-size: clamp(28px, 5vw, 40px); line-height: 1.2; margin: 8px 0 10px; }
+header.top p { color: #DCE3EC; margin: 0; max-width: 680px; }
+nav.toc { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; }
+nav.toc a { white-space: nowrap; text-decoration: none; color: var(--navy); font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--user); }
+nav.toc a:hover { background: #D3DDEA; }
+main { padding: 28px 0 60px; }
+section.block { margin-bottom: 40px; scroll-margin-top: 64px; }
+h2 { font-family: Lora, serif; font-weight: 600; font-size: 26px; color: var(--ink); margin: 0 0 6px; }
+h3 { font-size: 18px; color: var(--navy); margin: 26px 0 8px; }
+.kicker { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--rust); font-weight: 600; margin-bottom: 4px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.note { background: #FBF1E6; border: 1px solid #EBCFB2; border-radius: 12px; padding: 14px 18px; margin: 14px 0; }
+.step { display: flex; gap: 14px; margin: 16px 0; }
+.step .n { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-top: 2px; }
+.step .body { flex: 1; min-width: 0; }
+.step p { margin: 0 0 6px; }
+.prompt { position: relative; background: var(--user); border: 1px solid #C9D4E2; border-radius: 12px; padding: 16px 18px 16px; margin: 10px 0; }
+.prompt .lab { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.prompt pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.copy { margin-top: 12px; border: 0; background: var(--navy); color: #fff; font: 600 14px Inter, sans-serif; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.copy:hover { background: #2A4C78; }
+.copy.ok { background: var(--green); }
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.file { display: flex; flex-direction: column; gap: 2px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--ink); }
+.file:hover { border-color: var(--navy); }
+.file b { font-size: 15px; }
+.file span { font-size: 13px; color: var(--muted); }
+.file .dl { color: var(--navy); font-weight: 600; font-size: 13px; margin-top: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+th { background: var(--navy); color: #fff; text-align: left; padding: 9px 10px; font-weight: 600; }
+td { border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+.tablewrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+td input, td select, td textarea { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+td textarea { resize: vertical; min-height: 38px; }
+.dot { display: inline-block; width: 13px; height: 13px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.outcomes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+.outcome { background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--rust-l); border-radius: 10px; padding: 12px 14px; font-size: 15px; }
+.outcome b { display: block; margin-bottom: 4px; }
+ul.check { padding-left: 22px; margin: 8px 0; }
+ul.check li { margin-bottom: 6px; }
+.save { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn2 { border: 1px solid var(--navy); background: #fff; color: var(--navy); font: 600 15px Inter, sans-serif; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.btn2.primary { background: var(--navy); color: #fff; }
+.small { font-size: 14px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 20px 0 40px; font-size: 13px; color: var(--muted); }
+a { color: var(--navy); }
+@media print { nav.toc, .copy, .save { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="logo"><img src="../logo_caphome.png" alt="CapHome"></span></div>
+    <div class="eye">Sesión 1 · Laboratorio</div>
+    <h1>Qué es la IA generativa y cómo usarla con seguridad</h1>
+    <p>Esta página es su espacio de trabajo durante la sesión. Siga los pasos en orden. Cada instrucción tiene un botón para copiarla y pegarla en su herramienta de IA.</p>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#inicio">Antes de empezar</a>
+  <a href="#kit">Archivos</a>
+  <a href="#p1">Práctica 1</a>
+  <a href="#verificar">Verificar</a>
+  <a href="#semaforo">Semáforo</a>
+  <a href="#p2">Práctica 2</a>
+  <a href="#repaso">Repaso</a>
+  <a href="#tarea">Para la sesión 2</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="block" id="inicio">
+  <div class="kicker">Antes de empezar</div>
+  <h2>Cómo trabajar en esta página</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Abra en otra pestaña la herramienta que tenga disponible, ChatGPT, Gemini o Claude, con su sesión iniciada.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Trabaje en pareja cuando el relator lo indique. Uno escribe en la herramienta y el otro va comprobando.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Lo que anote en las tablas se guarda en este navegador. Al final puede descargarlo con el botón de la última sección.</p></div></div>
+  <div class="note"><b>Regla de esta sesión.</b> Los archivos del kit son ficticios y por eso se pueden subir a una versión gratuita. Una planilla o un informe real de su planta no se sube a una versión gratuita.</div>
+</section>
+
+<section class="block" id="kit">
+  <div class="kicker">Kit de la sesión</div>
+  <h2>Archivos para descargar</h2>
+  <p>Todos corresponden a Tableros Quillén S.A., una planta ficticia de contrachapado de pino radiata. Ningún nombre ni cifra es real.</p>
+  <div class="files">
+    <a class="file" href="kit/S1-K01_Produccion_octubre.xlsx" download><b>S1-K01 Producción de octubre</b><span>Planilla Excel</span><span class="dl">Descargar</span></a>
+    <a class="file" href="kit/S1-K02_Informe_turno_C_linea2.docx" download><b>S1-K02 Informe de turno</b><span>Documento Word</span><span class="dl">Descargar</span></a>
+    <a class="file" href="kit/S1-K03_Ventas_por_destino.xlsx" download><b>S1-K03 Ventas por destino</b><span>Planilla Excel</span><span class="dl">Descargar</span></a>
+    <a class="file" href="kit/S1-K04_Ficha_tecnica_moldaje_EN.docx" download><b>S1-K04 Ficha técnica</b><span>Documento Word, en inglés</span><span class="dl">Descargar</span></a>
+    <a class="file" href="kit/S1-K05_Liquidacion_septiembre.docx" download><b>S1-K05 Liquidación de sueldo</b><span>Documento Word</span><span class="dl">Descargar</span></a>
+  </div>
+</section>
+
+<section class="block" id="p1">
+  <div class="kicker">Práctica 1 · En parejas · 28 minutos</div>
+  <h2>Usarla y comprobarla</h2>
+
+  <h3>Desafío 1. Su primer informe para la gerencia</h3>
+  <div class="step"><div class="n">1</div><div class="body"><p>En su herramienta de IA, adjunte el archivo <b>S1-K01 Producción de octubre</b>.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Copie esta instrucción y envíela junto con el archivo.</p>
+    <div class="prompt"><div class="lab">Instrucción</div><pre>Revisa esta planilla de producción de octubre. Dime cuántos metros cúbicos de tablero se produjeron, cuál fue el rendimiento del mes y si hay algún dato que no cuadre. Después resume todo en cinco líneas para el gerente de planta.</pre><button class="copy">Copiar instrucción</button></div>
+  </div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Compruebe la producción en el mismo archivo. Ábralo en Excel, seleccione los valores de la columna <b>Tablero m3</b> sin incluir la fila TOTAL MES, y lea la suma en la barra inferior de la ventana de Excel.</p></div></div>
+  <div class="step"><div class="n">4</div><div class="body"><p>Compare esa suma con la cifra que entregó la herramienta y anótelo en la ficha de registro.</p></div></div>
+
+  <h3>Desafío 2. La cifra para la presentación</h3>
+  <div class="step"><div class="n">1</div><div class="body"><p>En una conversación nueva, copie y envíe esta pregunta.</p>
+    <div class="prompt"><div class="lab">Instrucción</div><pre>¿Cuántos metros cúbicos de tableros contrachapados produjo Chile en 2024 y cuál es la fuente oficial de ese dato? Dame la cifra exacta.</pre><button class="copy">Copiar instrucción</button></div>
+  </div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Si no le entrega ninguna cifra, insista como lo haría en su trabajo.</p>
+    <div class="prompt"><div class="lab">Si no responde</div><pre>Entiendo que no tengas el dato exacto, pero necesito una cifra aproximada para una presentación a la gerencia mañana. Dame tu mejor estimación en metros cúbicos.</pre><button class="copy">Copiar instrucción</button></div>
+  </div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Compare con la cifra oficial en la <a href="https://wef.infor.cl/index.php/sector-forestal/industria-forestal/produccion/produccion-de-tableros-y-chapas?view=comercio_ind_pro_tableros" target="_blank" rel="noopener">tabla de producción de tableros y chapas del Instituto Forestal, INFOR</a>. Busque la fila de contrachapados y el año 2024.</p></div></div>
+  <p><b>Lo que puede pasar y lo que significa</b></p>
+  <div class="outcomes">
+    <div class="outcome"><b>Da una cifra que no coincide</b>Aunque haya advertido que era una estimación. A la reunión llega el número, no la advertencia.</div>
+    <div class="outcome"><b>Da una cifra correcta</b>Igual había que comprobarla, porque eso solo se sabe después de verificar.</div>
+    <div class="outcome"><b>No da ninguna cifra</b>Es la mejor respuesta posible. Presionarla para que conteste es lo que produce el error.</div>
+  </div>
+
+  <h3>Ficha de registro</h3>
+  <div class="tablewrap"><table>
+    <tr><th style="width:12%">Desafío</th><th style="width:18%">Herramienta</th><th>Qué respondió</th><th>¿Coincide con la comprobación?</th><th>Cómo lo comprobé</th></tr>
+    <tr><td>1</td><td><input data-k="r1_tool"></td><td><textarea data-k="r1_resp"></textarea></td><td><textarea data-k="r1_ok"></textarea></td><td><textarea data-k="r1_how"></textarea></td></tr>
+    <tr><td>2</td><td><input data-k="r2_tool"></td><td><textarea data-k="r2_resp"></textarea></td><td><textarea data-k="r2_ok"></textarea></td><td><textarea data-k="r2_how"></textarea></td></tr>
+  </table></div>
+</section>
+
+<section class="block" id="verificar">
+  <div class="kicker">Para usar todo el curso</div>
+  <h2>Lista de verificación de respuestas</h2>
+  <div class="card"><ul class="check">
+    <li><b>Cifras.</b> ¿Revisé los cálculos o los comparé con la fuente original?</li>
+    <li><b>Fuentes.</b> ¿Existen las fuentes que cita y dicen lo que la herramienta afirma?</li>
+    <li><b>Vigencia.</b> Si habla de leyes, normas, precios o versiones, ¿lo confirmé en una fuente oficial y actual?</li>
+    <li><b>Supuestos.</b> ¿La respuesta da por hecho algo que yo no le dije?</li>
+    <li><b>Datos.</b> ¿Le entregué solo información que el semáforo permite para esta herramienta?</li>
+    <li><b>Decisión.</b> ¿La decisión final la tomo yo, con mi nombre?</li>
+  </ul></div>
+</section>
+
+<section class="block" id="semaforo">
+  <div class="kicker">La regla del curso</div>
+  <h2>El semáforo de datos</h2>
+  <div class="tablewrap"><table>
+    <tr><th style="width:18%">Color</th><th style="width:44%">Regla</th><th>Ejemplos</th></tr>
+    <tr><td><span class="dot" style="background:var(--red)"></span><b>Rojo</b></td><td>Nunca se sube a una herramienta que la empresa no haya contratado y autorizado</td><td>Liquidaciones de sueldo, RUT, datos de salud, accidentes con nombre, precios y márgenes por cliente, contratos, costos detallados</td></tr>
+    <tr><td><span class="dot" style="background:var(--amber)"></span><b>Amarillo</b></td><td>Se trabaja solo después de anonimizar, y solo en una herramienta contratada por la empresa. En una versión gratuita, solo como ejemplo ficticio equivalente</td><td>Informes de turno, planillas de producción y mermas, registros de fallas, reclamos de clientes, correos</td></tr>
+    <tr><td><span class="dot" style="background:var(--green)"></span><b>Verde</b></td><td>Uso libre en cualquier herramienta</td><td>Fichas técnicas y políticas publicadas, manuales públicos de fabricantes, textos propios sin datos</td></tr>
+  </table></div>
+  <h3>Cómo se anonimiza</h3>
+  <div class="card"><ul class="check">
+    <li><b>Reemplazar.</b> Los nombres por roles, por ejemplo operador A.</li>
+    <li><b>Generalizar.</b> Los clientes por mercado, por ejemplo cliente Reino Unido 1.</li>
+    <li><b>Eliminar.</b> RUT, teléfonos, correos y direcciones.</li>
+    <li><b>Agregar.</b> Precios y costos como índices o rangos en vez de valores exactos.</li>
+    <li><b>Revisar todo el archivo.</b> Pestañas ocultas, comentarios, encabezados y propiedades del documento.</li>
+  </ul></div>
+  <h3>Antes de subir cualquier archivo</h3>
+  <div class="card"><ul class="check">
+    <li>¿Lo abrí completo, con sus pestañas ocultas, comentarios y encabezados?</li>
+    <li>¿Trae nombres, RUT, teléfonos, correos o direcciones?</li>
+    <li>¿Trae precios, márgenes, costos o nombres de clientes?</li>
+    <li>¿Puedo describir el documento en vez de subirlo?</li>
+    <li>¿Tengo desactivado el uso de mis conversaciones para entrenar?</li>
+  </ul></div>
+</section>
+
+<section class="block" id="p2">
+  <div class="kicker">Práctica 2 · 35 minutos</div>
+  <h2>El semáforo de su área</h2>
+
+  <h3>Parte A. En grupo, 15 minutos</h3>
+  <div class="step"><div class="n">1</div><div class="body"><p>Descargue y abra completos los cinco archivos del kit. Para ver las pestañas ocultas de una planilla de Excel, haga clic derecho sobre cualquier pestaña y elija <b>Mostrar</b>.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Clasifique cada archivo en la tabla.</p>
+    <div class="tablewrap"><table>
+      <tr><th style="width:34%">Archivo</th><th style="width:18%">Color</th><th>Por qué</th></tr>
+      <tr><td>S1-K01 Producción de octubre</td><td><select data-k="a1"><option></option><option>Rojo</option><option>Amarillo</option><option>Verde</option></select></td><td><textarea data-k="a1w"></textarea></td></tr>
+      <tr><td>S1-K02 Informe de turno</td><td><select data-k="a2"><option></option><option>Rojo</option><option>Amarillo</option><option>Verde</option></select></td><td><textarea data-k="a2w"></textarea></td></tr>
+      <tr><td>S1-K03 Ventas por destino</td><td><select data-k="a3"><option></option><option>Rojo</option><option>Amarillo</option><option>Verde</option></select></td><td><textarea data-k="a3w"></textarea></td></tr>
+      <tr><td>S1-K04 Ficha técnica</td><td><select data-k="a4"><option></option><option>Rojo</option><option>Amarillo</option><option>Verde</option></select></td><td><textarea data-k="a4w"></textarea></td></tr>
+      <tr><td>S1-K05 Liquidación de sueldo</td><td><select data-k="a5"><option></option><option>Rojo</option><option>Amarillo</option><option>Verde</option></select></td><td><textarea data-k="a5w"></textarea></td></tr>
+    </table></div>
+  </div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Anonimice el informe de turno S1-K02 con la función Buscar y reemplazar de Word, aplicando las técnicas del semáforo.</p></div></div>
+
+  <h3>Parte B. Individual, 20 minutos</h3>
+  <div class="step"><div class="n">1</div><div class="body"><p>Copie esta instrucción en su herramienta y envíela.</p>
+    <div class="prompt"><div class="lab">Clasificador de semáforo</div><pre>Actúa como asesor de protección de información de una planta industrial chilena.
+Te voy a describir tipos de documentos que uso en mi trabajo. Nunca te daré su contenido.
+Para cada uno propón un color.
+Rojo si contiene datos personales, datos de salud, remuneraciones, precios, márgenes, costos detallados, contratos o nombres de clientes.
+Amarillo si se puede trabajar después de quitar nombres, RUT, clientes y cifras sensibles.
+Verde si es información publicada o no contiene datos de personas ni de la empresa.
+Considera que en Chile rige la Ley 19.628 y que la Ley 21.719 rige desde el 1 de diciembre de 2026, salvo postergación.
+Responde en una tabla con las columnas Documento, Color propuesto, Por qué, y Qué habría que quitar para bajarlo de color.
+Si te falta información para decidir, pregúntame antes de clasificar.
+La decisión final es mía, tú solo propones.</pre><button class="copy">Copiar instrucción</button></div>
+  </div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Describa ocho documentos que usa en su trabajo real, solo por su tipo y nunca por su contenido. Por ejemplo, "informe mensual de mantención con nombres de técnicos y costos de repuestos". Si la herramienta le hace preguntas, respóndalas.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>La herramienta propone y usted decide. Anote su decisión en la tabla. Este es el producto de la sesión.</p></div></div>
+
+  <h3>Semáforo de mi área</h3>
+  <div class="tablewrap"><table id="mine">
+    <tr><th style="width:4%">#</th><th style="width:38%">Documento que uso</th><th style="width:16%">Color</th><th>Qué le quito antes de usarlo con IA</th></tr>
+  </table></div>
+</section>
+
+<section class="block" id="repaso">
+  <div class="kicker">Cierre</div>
+  <h2>Repaso con la IA</h2>
+  <p>Copie esta instrucción y responda las preguntas que le haga la herramienta, una a la vez.</p>
+  <div class="prompt"><div class="lab">Instrucción</div><pre>Hazme tres preguntas, una a la vez, para comprobar si entendí estas ideas. Por qué un modelo de lenguaje puede afirmar algo falso con seguridad. Qué información de una empresa no se debe subir a una versión gratuita. Cómo se anonimiza un documento. Después de cada respuesta mía, dime en una o dos líneas si es correcta y qué me faltó.</pre><button class="copy">Copiar instrucción</button></div>
+</section>
+
+<section class="block" id="tarea">
+  <div class="kicker">Para la sesión 2</div>
+  <h2>Antes de la próxima sesión</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Termine su semáforo en la tabla de la práctica 2.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Llegue con una cuenta creada en ChatGPT, Gemini y Claude. En la sesión 2 se comparan las tres con la misma tarea.</p></div></div>
+  <div class="card">
+    <h3 style="margin-top:0">Guardar lo que anotó</h3>
+    <p class="small">Lo que escribió en las tablas queda guardado en este navegador. Descárguelo para conservarlo.</p>
+    <div class="save">
+      <button class="btn2 primary" id="dl">Descargar mis respuestas</button>
+      <button class="btn2" id="pr">Imprimir o guardar en PDF</button>
+      <button class="btn2" id="clr">Borrar lo anotado</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  Curso de IA para Tulsa · Material del participante · Todo nombre, cifra y documento de los archivos de práctica es ficticio.<br>
+  Fuentes. NIST AI 600-1, Generative AI Profile, 2024. Documentación de privacidad de OpenAI, Google y Anthropic, revisada el 22 de octubre de 2026. Ley 19.628 y Ley 21.719. Instituto Forestal, INFOR.
+</div></footer>
+
+<script>
+(function () {
+  var KEY = 'lab-s1-tulsa';
+  var mine = document.getElementById('mine');
+  for (var i = 1; i <= 8; i++) {
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + i + '</td><td><textarea data-k="m' + i + 'd"></textarea></td>' +
+      '<td><select data-k="m' + i + 'c"><option></option><option>Rojo</option><option>Amarillo</option><option>Verde</option></select></td>' +
+      '<td><textarea data-k="m' + i + 'q"></textarea></td>';
+    mine.appendChild(tr);
+  }
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+  var fields = document.querySelectorAll('[data-k]');
+  fields.forEach(function (el) {
+    var k = el.getAttribute('data-k');
+    if (state[k] != null) el.value = state[k];
+    el.addEventListener('input', function () {
+      state[k] = el.value;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    });
+  });
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var text = b.parentNode.querySelector('pre').innerText;
+      var done = function () { var t = b.textContent; b.textContent = 'Copiada'; b.classList.add('ok'); setTimeout(function () { b.textContent = t; b.classList.remove('ok'); }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+      } else { fallback(text); done(); }
+    });
+  });
+  function fallback(text) {
+    var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+    ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta);
+  }
+
+  function v(k) { return (state[k] || '').trim(); }
+  document.getElementById('dl').addEventListener('click', function () {
+    var L = [];
+    L.push('Curso de IA para Tulsa. Sesión 1. Mis respuestas', '');
+    L.push('FICHA DE REGISTRO');
+    [1, 2].forEach(function (n) {
+      L.push('Desafío ' + n + '. Herramienta ' + v('r' + n + '_tool'));
+      L.push('  Qué respondió. ' + v('r' + n + '_resp'));
+      L.push('  Coincide con la comprobación. ' + v('r' + n + '_ok'));
+      L.push('  Cómo lo comprobé. ' + v('r' + n + '_how'));
+    });
+    L.push('', 'PARTE A. KIT');
+    ['S1-K01 Producción de octubre', 'S1-K02 Informe de turno', 'S1-K03 Ventas por destino', 'S1-K04 Ficha técnica', 'S1-K05 Liquidación de sueldo'].forEach(function (name, i) {
+      L.push(name + '. ' + v('a' + (i + 1)) + '. ' + v('a' + (i + 1) + 'w'));
+    });
+    L.push('', 'SEMÁFORO DE MI ÁREA');
+    for (var i = 1; i <= 8; i++) {
+      if (v('m' + i + 'd') || v('m' + i + 'c') || v('m' + i + 'q'))
+        L.push(i + '. ' + v('m' + i + 'd') + '. Color ' + v('m' + i + 'c') + '. Qué le quito. ' + v('m' + i + 'q'));
+    }
+    var blob = new Blob([L.join('\n')], { type: 'text/plain;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Sesion_01_Mis_respuestas.txt';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  });
+  document.getElementById('pr').addEventListener('click', function () { window.print(); });
+  var clr = document.getElementById('clr'), armed = false;
+  clr.addEventListener('click', function () {
+    if (!armed) { armed = true; clr.textContent = 'Confirmar borrado'; setTimeout(function () { armed = false; clr.textContent = 'Borrar lo anotado'; }, 4000); return; }
+    armed = false; clr.textContent = 'Borrar lo anotado';
+    state = {}; try { localStorage.removeItem(KEY); } catch (e) {}
+    document.querySelectorAll('[data-k]').forEach(function (el) { el.value = ''; });
+  });
+})();
+</script>
+</body>
+</html>
