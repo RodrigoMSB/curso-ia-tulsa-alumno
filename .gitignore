@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+.AppleDouble
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Office (archivos temporales y de bloqueo)
+~$*
+.~lock.*#
