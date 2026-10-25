@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Laboratorio de la sesión 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1F3A5F; --ink: #1B2433; --muted: #5B6270; --rust: #8C4A22; --rust-l: #C8702A;
+  --paper: #F7F5F0; --line: #D9D3C7; --card: #FFFFFF; --user: #E6ECF3;
+  --red: #A8322D; --amber: #C98A1B; --green: #3E7B4F;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+header.top { background: var(--navy); color: #fff; padding: 28px 16px 32px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+header.top .wrap { padding: 0; }
+.brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.brand .logo { background: #fff; border-radius: 10px; padding: 6px 12px; display: inline-flex; }
+.brand img { height: 40px; display: block; }
+.eye { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; color: #E7A774; }
+h1 { font-family: Lora, serif; font-weight: 500; font-size: clamp(28px, 5vw, 40px); line-height: 1.2; margin: 8px 0 10px; }
+header.top p { color: #DCE3EC; margin: 0; max-width: 680px; }
+nav.toc { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; }
+nav.toc a { white-space: nowrap; text-decoration: none; color: var(--navy); font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--user); }
+nav.toc a:hover { background: #D3DDEA; }
+main { padding: 28px 0 60px; }
+section.block { margin-bottom: 40px; scroll-margin-top: 64px; }
+h2 { font-family: Lora, serif; font-weight: 600; font-size: 26px; color: var(--ink); margin: 0 0 6px; }
+h3 { font-size: 18px; color: var(--navy); margin: 26px 0 8px; }
+.kicker { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--rust); font-weight: 600; margin-bottom: 4px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.note { background: #FBF1E6; border: 1px solid #EBCFB2; border-radius: 12px; padding: 14px 18px; margin: 14px 0; }
+.step { display: flex; gap: 14px; margin: 16px 0; }
+.step .n { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-top: 2px; }
+.step .body { flex: 1; min-width: 0; }
+.step p { margin: 0 0 6px; }
+.prompt { position: relative; background: var(--user); border: 1px solid #C9D4E2; border-radius: 12px; padding: 16px 18px 16px; margin: 10px 0; }
+.prompt .lab { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.prompt pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.copy { margin-top: 12px; border: 0; background: var(--navy); color: #fff; font: 600 14px Inter, sans-serif; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.copy:hover { background: #2A4C78; }
+.copy.ok { background: var(--green); }
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.file { display: flex; flex-direction: column; gap: 2px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--ink); }
+.file:hover { border-color: var(--navy); }
+.file b { font-size: 15px; }
+.file span { font-size: 13px; color: var(--muted); }
+.file .dl { color: var(--navy); font-weight: 600; font-size: 13px; margin-top: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+th { background: var(--navy); color: #fff; text-align: left; padding: 9px 10px; font-weight: 600; }
+td { border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+.tablewrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+td input, td select, td textarea { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+td textarea { resize: vertical; min-height: 38px; }
+.dot { display: inline-block; width: 13px; height: 13px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.outcomes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+.outcome { background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--rust-l); border-radius: 10px; padding: 12px 14px; font-size: 15px; }
+.outcome b { display: block; margin-bottom: 4px; }
+ul.check { padding-left: 22px; margin: 8px 0; }
+ul.check li { margin-bottom: 6px; }
+.save { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn2 { border: 1px solid var(--navy); background: #fff; color: var(--navy); font: 600 15px Inter, sans-serif; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.btn2.primary { background: var(--navy); color: #fff; }
+.small { font-size: 14px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 20px 0 40px; font-size: 13px; color: var(--muted); }
+a { color: var(--navy); }
+@media print { nav.toc, .copy, .save { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="logo"><img src="../logo_caphome.png" alt="CapHome"></span></div>
+    <div class="eye">Sesión 2 · Laboratorio</div>
+    <h1>Herramientas y flujos de trabajo</h1>
+    <p>Esta página es su espacio de trabajo durante la sesión. Siga los pasos en orden. Cada instrucción tiene un botón para copiarla y pegarla en su herramienta de IA.</p>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#inicio">Antes de empezar</a>
+  <a href="#kit">Archivo</a>
+  <a href="#p1">Práctica 1</a>
+  <a href="#elegir">Cómo elegir</a>
+  <a href="#desarmar">Desarmar</a>
+  <a href="#p2">Práctica 2</a>
+  <a href="#tarea">Para la sesión 3</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="block" id="inicio">
+  <div class="kicker">Antes de empezar</div>
+  <h2>Cómo trabajar en esta página</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Abra ChatGPT, Gemini y Claude en pestañas distintas, con su sesión iniciada en cada una.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Cada uno trabaja con sus propias herramientas. Cuando el relator lo pida, comparta su resultado en el chat de la plataforma.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Lo que anote en las tablas se guarda en este navegador. Al final descárguelo con el botón de la última sección. Ahí queda guardada su instrucción de partida.</p></div></div>
+  <div class="note"><b>Regla de esta sesión.</b> El archivo de práctica es ficticio y por eso se puede subir a una versión gratuita. Un registro real de fallas de su planta es amarillo y no se sube a una versión gratuita.</div>
+</section>
+
+<section class="block" id="kit">
+  <div class="kicker">Archivo de la sesión</div>
+  <h2>Registro de detenciones de octubre</h2>
+  <p>Corresponde a Tableros Quillén S.A., la planta ficticia de la sesión 1. Ningún nombre ni cifra es real. Está en dos formatos con el mismo contenido.</p>
+  <div class="files">
+    <a class="file" href="kit/S2-K01_Detenciones_octubre.xlsx" download><b>S2-K01 Detenciones de octubre</b><span>Planilla Excel</span><span class="dl">Descargar</span></a>
+    <a class="file" href="kit/S2-K01_Detenciones_octubre.csv" download><b>S2-K01 Detenciones de octubre</b><span>Archivo CSV, por si una herramienta no acepta el Excel</span><span class="dl">Descargar</span></a>
+  </div>
+  <p class="small">En Claude, para subir un archivo Excel hay que tener activada la ejecución de código en la configuración. Si no lo acepta, suba el CSV.</p>
+</section>
+
+<section class="block" id="p1">
+  <div class="kicker">Práctica 1 · Individual · 30 minutos</div>
+  <h2>El mismo encargo en las tres</h2>
+
+  <h3>Paso 1. Haga el encargo en cada herramienta</h3>
+  <div class="step"><div class="n">1</div><div class="body"><p>En cada herramienta, adjunte el archivo <b>S2-K01</b> y envíe esta instrucción, igual en las tres.</p>
+    <div class="prompt"><div class="lab">Instrucción</div><pre>Te adjunto el registro de detenciones de octubre de una planta de tableros. Tengo que preparar la reunión de mantención del lunes.
+Ordena los equipos de mayor a menor según los minutos detenidos por fallas, con el porcentaje de cada uno.
+Dime cuál es la causa principal del primer equipo.
+Propón tres acciones concretas para mantención.
+Avísame si ves algún problema en los datos.</pre><button class="copy">Copiar instrucción</button></div>
+  </div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>En la misma conversación, envíe la segunda.</p>
+    <div class="prompt"><div class="lab">Segunda instrucción</div><pre>Con lo que encontraste, redacta un correo de no más de seis líneas al jefe de mantención para pedirle que revise el primer equipo antes del lunes.</pre><button class="copy">Copiar instrucción</button></div>
+  </div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Anote lo que entregó cada una.</p></div></div>
+  <div class="tablewrap"><table>
+    <tr><th style="width:12%">Herramienta</th><th style="width:14%">¿Aceptó el archivo?</th><th>Primer equipo y minutos</th><th style="width:14%">¿Unificó los nombres?</th><th style="width:14%">¿Separó las programadas?</th><th style="width:11%">Correo, nota de 1 a 7</th></tr>
+    <tr><td>ChatGPT</td><td><input data-k="c1a"></td><td><textarea data-k="c1e"></textarea></td><td><select data-k="c1n"><option></option><option>Sí</option><option>No</option></select></td><td><select data-k="c1p"><option></option><option>Sí</option><option>No</option></select></td><td><input data-k="c1c" inputmode="decimal"></td></tr>
+    <tr><td>Gemini</td><td><input data-k="c2a"></td><td><textarea data-k="c2e"></textarea></td><td><select data-k="c2n"><option></option><option>Sí</option><option>No</option></select></td><td><select data-k="c2p"><option></option><option>Sí</option><option>No</option></select></td><td><input data-k="c2c" inputmode="decimal"></td></tr>
+    <tr><td>Claude</td><td><input data-k="c3a"></td><td><textarea data-k="c3e"></textarea></td><td><select data-k="c3n"><option></option><option>Sí</option><option>No</option></select></td><td><select data-k="c3p"><option></option><option>Sí</option><option>No</option></select></td><td><input data-k="c3c" inputmode="decimal"></td></tr>
+  </table></div>
+
+  <h3>Paso 2. Compruebe en Excel</h3>
+  <div class="step"><div class="n">1</div><div class="body"><p>Abra el archivo en Excel, seleccione la fila de títulos y active el filtro, en <b>Datos, Filtro</b>.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>En la columna <b>Programada</b> deje solo No.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Abra el filtro de la columna <b>Equipo</b> y mire con atención la lista de nombres.</p></div></div>
+  <div class="step"><div class="n">4</div><div class="body"><p>Marque el equipo que salió primero y seleccione la columna <b>Minutos</b>. La barra inferior de Excel suma solo las filas que quedan a la vista. Compare esa suma con lo que dijo cada herramienta.</p></div></div>
+  <div class="step"><div class="n">5</div><div class="body"><p>Repita con una cifra secundaria que haya dado alguna herramienta, por ejemplo los minutos de una causa del segundo equipo. Use también el filtro de la columna <b>Tipo de falla</b>.</p></div></div>
+  <div class="card"><b>Lo que encontré al comprobar</b><textarea data-k="chk" style="width:100%;margin-top:8px;border:1px solid var(--line);border-radius:6px;padding:8px;font:15px Inter,sans-serif;min-height:70px"></textarea></div>
+</section>
+
+<section class="block" id="elegir">
+  <div class="kicker">Para usar todo el curso</div>
+  <h2>Cómo elegir una herramienta</h2>
+  <div class="card"><ul class="check">
+    <li><b>¿Qué color tiene el dato?</b> El semáforo decide antes que la herramienta. Rojo, ninguna versión gratuita. Amarillo, solo una herramienta contratada por la empresa, y en una gratuita solo un ejemplo ficticio equivalente. Verde, cualquiera.</li>
+    <li><b>¿Qué permite la versión gratuita?</b> Revise la tabla siguiente.</li>
+    <li><b>¿Qué hizo bien en mi prueba?</b> Lo que anotó en la práctica 1 vale más que cualquier ranking.</li>
+    <li><b>¿Puedo comprobar lo que entrega?</b> Si la respuesta trae cifras, prefiera la que muestra cómo llegó a ellas.</li>
+  </ul></div>
+  <div class="note">No hay una herramienta mejor para todo. Hay una mejor para cada tarea y cada dato, y en todas se comprueba.</div>
+  <h3>Límites de las versiones gratuitas</h3>
+  <div class="tablewrap"><table>
+    <tr><th style="width:18%">Herramienta</th><th>Lo que permite</th></tr>
+    <tr><td>ChatGPT</td><td>Tres subidas de archivo por día</td></tr>
+    <tr><td>Gemini</td><td>Hasta diez archivos por mensaje, 100 MB por archivo</td></tr>
+    <tr><td>Claude</td><td>Hasta 20 archivos por conversación, 500 MB por archivo. Para subir Excel hay que activar la ejecución de código. Cupo por sesión de cinco horas, variable</td></tr>
+  </table></div>
+  <p class="small">Leído en la página oficial de cada proveedor el 25 de octubre de 2026. Los proveedores cambian estos límites cada pocos meses.</p>
+</section>
+
+<section class="block" id="desarmar">
+  <div class="kicker">Antes de la práctica 2</div>
+  <h2>Cómo desarmar una tarea</h2>
+  <p>La IA no hace una tarea completa. Apoya algunos pasos. La decisión y la revisión final quedan siempre en una persona.</p>
+  <h3>Ejemplo. El informe semanal de detenciones del jefe de mantención</h3>
+  <div class="tablewrap"><table>
+    <tr><th style="width:8%">Paso</th><th>Qué se hace</th><th style="width:32%">Quién</th></tr>
+    <tr><td>1</td><td>Descargar el registro de la semana</td><td>Sistema o persona</td></tr>
+    <tr><td>2</td><td>Corregir nombres mal escritos</td><td>IA apoya</td></tr>
+    <tr><td>3</td><td>Sumar minutos por equipo y causa</td><td>IA apoya, persona comprueba</td></tr>
+    <tr><td>4</td><td>Encontrar el equipo que más paró</td><td>IA propone</td></tr>
+    <tr><td>5</td><td>Decidir qué se revisa primero</td><td>Persona decide</td></tr>
+    <tr><td>6</td><td>Redactar el informe</td><td>IA apoya</td></tr>
+    <tr><td>7</td><td>Revisar cifras y enviar</td><td>Persona decide</td></tr>
+  </table></div>
+</section>
+
+<section class="block" id="p2">
+  <div class="kicker">Práctica 2 · Individual · 32 minutos</div>
+  <h2>Sus dos tareas</h2>
+
+  <h3>Parte A. Dos tareas repetitivas de su área, 8 minutos</h3>
+  <p>Anote dos tareas que repite en su trabajo. Si no sabe el tiempo exacto, anote su mejor estimación y mídalo durante la semana. Los minutos al mes se calculan solos.</p>
+  <div class="tablewrap"><table>
+    <tr><th style="width:4%">#</th><th>Tarea</th><th style="width:12%">Veces al mes</th><th style="width:12%">Minutos cada vez</th><th style="width:12%">Minutos al mes</th><th style="width:15%">Color del dato</th></tr>
+    <tr><td>1</td><td><textarea data-k="t1"></textarea></td><td><input data-k="t1f" inputmode="decimal"></td><td><input data-k="t1m" inputmode="decimal"></td><td><b id="t1x">·</b></td><td><select data-k="t1c"><option></option><option>Rojo</option><option>Amarillo</option><option>Verde</option></select></td></tr>
+    <tr><td>2</td><td><textarea data-k="t2"></textarea></td><td><input data-k="t2f" inputmode="decimal"></td><td><input data-k="t2m" inputmode="decimal"></td><td><b id="t2x">·</b></td><td><select data-k="t2c"><option></option><option>Rojo</option><option>Amarillo</option><option>Verde</option></select></td></tr>
+  </table></div>
+
+  <h3>Parte B. Desarme una de las dos, 12 minutos</h3>
+  <div class="step"><div class="n">1</div><div class="body"><p>Copie el desarmador en cualquiera de las tres herramientas. Al final, en el mismo mensaje, describa su tarea de forma general, sin datos reales ni nombres.</p>
+    <div class="prompt"><div class="lab">Desarmador de tareas</div><pre>Quiero apoyar con IA una tarea repetitiva de mi trabajo. Te la voy a describir de forma general, sin datos reales ni nombres.
+Desármala en pasos, desde que empieza hasta que se entrega.
+Para cada paso indica si la IA puede apoyarlo, si lo tiene que hacer o decidir una persona, o si depende de un sistema de la empresa.
+Marca siempre como decisión de una persona la revisión final y cualquier paso que tenga consecuencias para la planta, las personas o los clientes.
+Responde en una tabla con las columnas Paso, Qué se hace, Quién lo hace y Por qué.
+Si te falta información para desarmarla bien, hazme hasta tres preguntas antes de responder.
+La tarea es la siguiente.</pre><button class="copy">Copiar instrucción</button></div>
+  </div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>La herramienta propone y usted decide. Anote su versión.</p></div></div>
+  <div class="tablewrap"><table id="steps">
+    <tr><th style="width:6%">Paso</th><th>Qué se hace</th><th style="width:26%">Quién lo hace</th></tr>
+  </table></div>
+
+  <h3>Parte C. Su instrucción de partida, 8 minutos</h3>
+  <p>Escriba la instrucción que le daría hoy a una herramienta para hacer esa tarea, tal como le sale, sin pensar en técnica. No la pruebe con datos reales. Si quiere probarla, use un ejemplo inventado.</p>
+  <div class="note">Esta instrucción se guarda tal cual. En la sesión 3 la va a mejorar, y en la sesión 8 se compara con la última que escriba.</div>
+  <div class="card"><b>Mi instrucción de partida</b><textarea data-k="ip" style="width:100%;margin-top:8px;border:1px solid var(--line);border-radius:6px;padding:8px;font:15px Inter,sans-serif;min-height:140px"></textarea></div>
+</section>
+
+<section class="block" id="tarea">
+  <div class="kicker">Para la sesión 3</div>
+  <h2>Antes de la próxima sesión</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Mida durante la semana cuántas veces hace sus dos tareas y cuánto le toman, y corrija la tabla de la parte A.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Guarde el archivo descargado con su instrucción de partida. En la sesión 3 la va a mejorar.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Lea la <a href="../pauta/">pauta de evaluación del caso aplicado</a>. Sus dos tareas son la base de ese caso.</p></div></div>
+  <div class="card">
+    <h3 style="margin-top:0">Guardar lo que anotó</h3>
+    <p class="small">Lo que escribió queda guardado en este navegador. Descárguelo para conservarlo.</p>
+    <div class="save">
+      <button class="btn2 primary" id="dl">Descargar mis respuestas</button>
+      <button class="btn2" id="pr">Imprimir o guardar en PDF</button>
+      <button class="btn2" id="clr">Borrar lo anotado</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  Curso de IA para Tulsa · Material del participante · Todo nombre, cifra y documento de los archivos de práctica es ficticio.<br>
+  Fuentes. OpenAI, File uploads FAQ. Google, Upload and analyze files in Gemini Apps. Anthropic, Uploading files to Claude y About free Claude usage. Leídas el 25 de octubre de 2026.
+</div></footer>
+
+<script>
+(function () {
+  var KEY = 'lab-s2-tulsa';
+  var steps = document.getElementById('steps');
+  for (var i = 1; i <= 8; i++) {
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + i + '</td><td><textarea data-k="p' + i + 'q"></textarea></td>' +
+      '<td><select data-k="p' + i + 'w"><option></option><option>IA apoya</option><option>IA propone, persona decide</option><option>Persona</option><option>Sistema de la empresa</option></select></td>';
+    steps.appendChild(tr);
+  }
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+
+  function num(s) { var n = parseFloat(String(s || '').trim().replace(',', '.')); return isNaN(n) ? null : n; }
+  function fmt(n) { return Math.round(n).toLocaleString('es-CL'); }
+  function calc() {
+    [1, 2].forEach(function (t) {
+      var f = num(state['t' + t + 'f']), m = num(state['t' + t + 'm']);
+      document.getElementById('t' + t + 'x').textContent = (f != null && m != null) ? fmt(f * m) : '·';
+    });
+  }
+
+  document.querySelectorAll('[data-k]').forEach(function (el) {
+    var k = el.getAttribute('data-k');
+    if (state[k] != null) el.value = state[k];
+    el.addEventListener('input', function () {
+      state[k] = el.value;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      calc();
+    });
+  });
+  calc();
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var text = b.parentNode.querySelector('pre').innerText;
+      var done = function () { var t = b.textContent; b.textContent = 'Copiada'; b.classList.add('ok'); setTimeout(function () { b.textContent = t; b.classList.remove('ok'); }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+      } else { fallback(text); done(); }
+    });
+  });
+  function fallback(text) {
+    var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+    ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta);
+  }
+
+  function v(k) { return (state[k] || '').trim(); }
+  document.getElementById('dl').addEventListener('click', function () {
+    var L = [];
+    L.push('Curso de IA para Tulsa. Sesión 2. Mis respuestas', '');
+    L.push('PRÁCTICA 1. EL MISMO ENCARGO EN LAS TRES');
+    ['ChatGPT', 'Gemini', 'Claude'].forEach(function (name, i) {
+      var n = i + 1;
+      L.push(name + '. Aceptó el archivo ' + v('c' + n + 'a') + '. Primer equipo ' + v('c' + n + 'e') + '. Unificó los nombres ' + v('c' + n + 'n') + '. Separó las programadas ' + v('c' + n + 'p') + '. Correo ' + v('c' + n + 'c'));
+    });
+    L.push('Lo que encontré al comprobar. ' + v('chk'));
+    L.push('', 'PARTE A. MIS DOS TAREAS');
+    [1, 2].forEach(function (t) {
+      var f = num(state['t' + t + 'f']), m = num(state['t' + t + 'm']);
+      L.push(t + '. ' + v('t' + t) + '. Veces al mes ' + v('t' + t + 'f') + '. Minutos cada vez ' + v('t' + t + 'm') + '. Minutos al mes ' + ((f != null && m != null) ? fmt(f * m) : '') + '. Color ' + v('t' + t + 'c'));
+    });
+    L.push('', 'PARTE B. PASOS DE MI TAREA');
+    for (var i = 1; i <= 8; i++) {
+      if (v('p' + i + 'q') || v('p' + i + 'w')) L.push(i + '. ' + v('p' + i + 'q') + '. ' + v('p' + i + 'w'));
+    }
+    L.push('', 'PARTE C. MI INSTRUCCIÓN DE PARTIDA', v('ip'));
+    var blob = new Blob([L.join('\n')], { type: 'text/plain;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Sesion_02_Mis_respuestas.txt';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  });
+  document.getElementById('pr').addEventListener('click', function () { window.print(); });
+  var clr = document.getElementById('clr'), armed = false;
+  clr.addEventListener('click', function () {
+    if (!armed) { armed = true; clr.textContent = 'Confirmar borrado'; setTimeout(function () { armed = false; clr.textContent = 'Borrar lo anotado'; }, 4000); return; }
+    armed = false; clr.textContent = 'Borrar lo anotado';
+    state = {}; try { localStorage.removeItem(KEY); } catch (e) {}
+    document.querySelectorAll('[data-k]').forEach(function (el) { el.value = ''; });
+    calc();
+  });
+})();
+</script>
+</body>
+</html>

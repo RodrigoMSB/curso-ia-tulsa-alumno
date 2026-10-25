@@ -1,0 +1,132 @@
+﻿Fecha;Turno;Linea;Equipo;Tipo de falla;Programada;Minutos;Descripcion
+2026-10-01;A;2;Linea 2;Cambio de formato;Si;25;Cambio de espesor programado
+2026-10-01;B;1;Secador 1;Sensor;No;35;Lectura de humedad irregular, se recalibro sensor
+2026-10-01;B;2;Escuadradora;Mecanica;No;45;Sierra con vibracion, cambio de disco
+2026-10-01;B;2;Prensa 2;Hidraulica;No;40;Baja presion hidraulica, se repuso aceite
+2026-10-01;C;2;Debobinadora 2;Atasco de chapa;No;15;Chapa enrollada en rodillo
+2026-10-02;A;2;Prensa 2;Hidraulica;No;25;Baja presion hidraulica, se repuso aceite
+2026-10-02;C;2;Debobinadora 2;Mecanica;No;35;Cuchilla desalineada, se ajusto
+2026-10-02;C;2;Secador 2;Sensor;No;25;Lectura de humedad irregular, se recalibro sensor
+2026-10-03;A;1;Secador 1;Electrica;No;20;Ventilador de zona 3 detenido
+2026-10-03;A;2;secador 2 ;Sensor;No;50;Lectura de humedad irregular, se recalibro sensor
+2026-10-03;A;2;Escuadradora;Electrica;No;35;Falla de contactor del motor
+2026-10-03;B;2;Prensa 2;Hidraulica;No;45;Baja presion hidraulica, se repuso aceite
+2026-10-03;C;2;Prensa 2;Mecanica;No;65;Plato con desgaste, se reviso
+2026-10-03;C;2;Secador 2;Sensor;No;20;Lectura de humedad irregular, se recalibro sensor
+2026-10-05;A;2;Encoladora;Atasco de chapa;No;20;Chapa atascada en entrada
+2026-10-05;B;1;Encoladora;Atasco de chapa;No;20;Chapa atascada en entrada
+2026-10-05;B;2;secador 2 ;Sensor;No;15;Lectura de humedad irregular, se recalibro sensor
+2026-10-05;C;2;Linea 2;Cambio de formato;Si;40;Cambio de espesor programado
+2026-10-05;C;2;Prensa 2;Hidraulica;No;45;Baja presion hidraulica, se repuso aceite
+2026-10-06;A;1;Debobinadora 1;Mecanica;No;20;Cuchilla desalineada, se ajusto
+2026-10-06;B;1;Lijadora;Mecanica;No;20;Cambio de banda de lija por rotura
+2026-10-06;B;2;Lijadora;Mecanica;No;35;Cambio de banda de lija por rotura
+2026-10-06;B;2;Encoladora;Atasco de chapa;No;25;Chapa atascada en entrada
+2026-10-06;C;2;Secador N°2;Sensor;No;35;Lectura de humedad irregular, se recalibro sensor
+2026-10-07;A;2;Secador N°2;Sensor;No;15;Lectura de humedad irregular, se recalibro sensor
+2026-10-07;A;2;Secador 2;Sensor;No;45;Lectura de humedad irregular, se recalibro sensor
+2026-10-07;B;2;Prensa 2;Mecanica;No;15;Plato con desgaste, se reviso
+2026-10-07;C;1;Encoladora;Mecanica;No;45;Rodillo dosificador trabado
+2026-10-07;C;1;Escuadradora;Mecanica;No;15;Sierra con vibracion, cambio de disco
+2026-10-08;A;1;Prensa 1;Hidraulica;No;60;Baja presion hidraulica, se repuso aceite
+2026-10-08;A;2;Prensa 2;Mecanica;No;15;Plato con desgaste, se reviso
+2026-10-08;B;1;Prensa 1;Mecanica;No;15;Plato con desgaste, se reviso
+2026-10-08;B;2;Debobinadora 2;Mecanica;No;20;Cuchilla desalineada, se ajusto
+2026-10-08;C;1;Encoladora;Atasco de chapa;No;60;Chapa atascada en entrada
+2026-10-08;C;2;Prensa 2;Mecanica;No;40;Plato con desgaste, se reviso
+2026-10-09;A;1;Encoladora;Mecanica;No;15;Rodillo dosificador trabado
+2026-10-09;A;2;Encoladora;Mecanica;No;35;Rodillo dosificador trabado
+2026-10-09;C;1;Prensa 1;Hidraulica;No;35;Baja presion hidraulica, se repuso aceite
+2026-10-10;A;2;Secador N°2;Sensor;No;20;Lectura de humedad irregular, se recalibro sensor
+2026-10-10;B;2;Prensa 2;Hidraulica;No;25;Baja presion hidraulica, se repuso aceite
+2026-10-10;C;1;Encoladora;Atasco de chapa;No;35;Chapa atascada en entrada
+2026-10-10;C;2;Prensa 2;Hidraulica;No;20;Baja presion hidraulica, se repuso aceite
+2026-10-12;C;1;Debobinadora 1;Mecanica;No;15;Cuchilla desalineada, se ajusto
+2026-10-12;C;2;Debobinadora 2;Atasco de chapa;No;20;Chapa enrollada en rodillo
+2026-10-13;A;2;Prensa 2;Hidraulica;No;35;Baja presion hidraulica, se repuso aceite
+2026-10-13;B;1;Encoladora;Atasco de chapa;No;20;Chapa atascada en entrada
+2026-10-13;B;2;Prensa 2;Hidraulica;No;45;Baja presion hidraulica, se repuso aceite
+2026-10-13;B;2;Secador 2;Electrica;No;15;Ventilador de zona 3 detenido
+2026-10-13;C;2;Prensa 2;Hidraulica;No;20;Baja presion hidraulica, se repuso aceite
+2026-10-14;B;1;Lijadora;Mecanica;No;20;Cambio de banda de lija por rotura
+2026-10-14;B;2;Secador 2;Sensor;No;50;Lectura de humedad irregular, se recalibro sensor
+2026-10-14;B;2;Lijadora;Mecanica;No;35;Cambio de banda de lija por rotura
+2026-10-14;C;1;Secador 1;Sensor;No;15;Lectura de humedad irregular, se recalibro sensor
+2026-10-14;C;2;Prensa 2;Hidraulica;No;35;Baja presion hidraulica, se repuso aceite. Queda en observacion
+2026-10-15;A;1;Secador 1;Electrica;No;35;Ventilador de zona 3 detenido
+2026-10-15;A;2;Lijadora;Mecanica;No;30;Cambio de banda de lija por rotura
+2026-10-15;A;2;Secador N°2;Sensor;No;30;Lectura de humedad irregular, se recalibro sensor
+2026-10-15;B;1;Debobinadora 1;Mecanica;No;35;Cuchilla desalineada, se ajusto
+2026-10-15;B;2;Secador N°2;Sensor;No;20;Lectura de humedad irregular, se recalibro sensor
+2026-10-15;C;1;Secador 1;Sensor;No;60;Lectura de humedad irregular, se recalibro sensor
+2026-10-15;C;2;Lijadora;Mecanica;No;25;Cambio de banda de lija por rotura
+2026-10-16;A;1;Prensa 1;Hidraulica;No;35;Baja presion hidraulica, se repuso aceite
+2026-10-16;A;2;Prensa 2;Mecanica;No;30;Plato con desgaste, se reviso
+2026-10-16;A;2;Prensa 2;Hidraulica;No;30;Baja presion hidraulica, se repuso aceite
+2026-10-16;B;1;Lijadora;Mecanica;No;35;Cambio de banda de lija por rotura
+2026-10-16;C;1;Prensa 1;Hidraulica;No;15;Baja presion hidraulica, se repuso aceite
+2026-10-16;C;2;Secador N°2;Sensor;No;20;Lectura de humedad irregular, se recalibro sensor
+2026-10-17;A;1;Debobinadora 1;Mecanica;No;35;Cuchilla desalineada, se ajusto
+2026-10-17;A;2;secador 2 ;Sensor;No;25;Lectura de humedad irregular, se recalibro sensor
+2026-10-17;B;1;Lijadora;Mecanica;No;20;Cambio de banda de lija por rotura
+2026-10-17;C;2;Secador 2;Sensor;No;45;Lectura de humedad irregular, se recalibro sensor
+2026-10-17;C;2;Prensa 2;Hidraulica;No;15;Baja presion hidraulica, se repuso aceite
+2026-10-19;A;1;Escuadradora;Mecanica;No;35;Sierra con vibracion, cambio de disco
+2026-10-19;A;2;secador 2 ;Sensor;No;45;Lectura de humedad irregular, se recalibro sensor
+2026-10-19;B;1;Debobinadora 1;Atasco de chapa;No;15;Chapa enrollada en rodillo
+2026-10-19;B;2;Secador N°2;Sensor;No;20;Lectura de humedad irregular, se recalibro sensor
+2026-10-19;C;1;Secador 1;Electrica;No;60;Ventilador de zona 3 detenido
+2026-10-20;A;2;Debobinadora 2;Mecanica;No;60;Cuchilla desalineada, se ajusto
+2026-10-20;B;1;Secador 1;Electrica;No;20;Ventilador de zona 3 detenido
+2026-10-20;B;2;Secador 2;Sensor;No;60;Lectura de humedad irregular, se recalibro sensor
+2026-10-20;C;1;Lijadora;Mecanica;No;15;Cambio de banda de lija por rotura
+2026-10-20;C;2;Prensa 2;Hidraulica;No;35;Baja presion hidraulica, se repuso aceite
+2026-10-21;A;1;Secador 1;Sensor;No;15;Lectura de humedad irregular, se recalibro sensor
+2026-10-21;B;1;Secador 1;Electrica;No;20;Ventilador de zona 3 detenido
+2026-10-21;B;2;Secador N°2;Electrica;No;15;Ventilador de zona 3 detenido
+2026-10-21;B;2;Escuadradora;Mecanica;No;70;Sierra con vibracion, cambio de disco
+2026-10-21;C;1;Escuadradora;Mecanica;No;20;Sierra con vibracion, cambio de disco
+2026-10-22;A;2;Encoladora;Mecanica;No;15;Rodillo dosificador trabado
+2026-10-22;A;2;Prensa 2;Mecanica;No;45;Plato con desgaste, se reviso
+2026-10-22;B;1;Debobinadora 1;Mecanica;No;60;Cuchilla desalineada, se ajusto
+2026-10-22;B;2;Prensa 2;Hidraulica;No;15;Baja presion hidraulica, se repuso aceite
+2026-10-22;C;1;Prensa 1;Hidraulica;No;15;Baja presion hidraulica, se repuso aceite
+2026-10-22;C;2;Secador 2;Sensor;No;25;Lectura de humedad irregular, se recalibro sensor
+2026-10-23;A;1;Linea 1;Cambio de formato;Si;60;Cambio de espesor programado
+2026-10-23;A;2;Secador 2;Sensor;No;60;Lectura de humedad irregular, se recalibro sensor
+2026-10-23;B;1;Debobinadora 1;Mecanica;No;50;Cuchilla desalineada, se ajusto
+2026-10-23;B;1;Prensa 1;Hidraulica;No;10;Baja presion hidraulica, se repuso aceite
+2026-10-23;C;1;Escuadradora;Mecanica;No;20;Sierra con vibracion, cambio de disco
+2026-10-24;A;2;Linea 2;Cambio de formato;Si;25;Cambio de espesor programado
+2026-10-24;B;1;Escuadradora;Electrica;No;20;Falla de contactor del motor
+2026-10-24;B;2;Secador 2;Sensor;No;25;Lectura de humedad irregular, se recalibro sensor
+2026-10-24;C;1;Escuadradora;Mecanica;No;20;Sierra con vibracion, cambio de disco
+2026-10-24;C;1;Escuadradora;Electrica;No;40;Falla de contactor del motor
+2026-10-26;A;2;Debobinadora 2;Mecanica;No;40;Cuchilla desalineada, se ajusto
+2026-10-26;A;2;Secador 2;Sensor;No;20;Lectura de humedad irregular, se recalibro sensor
+2026-10-26;B;1;Prensa 1;Mecanica;No;15;Plato con desgaste, se reviso
+2026-10-26;C;1;Prensa 1;Hidraulica;No;20;Baja presion hidraulica, se repuso aceite
+2026-10-27;A;1;Prensa 1;Mecanica;No;35;Plato con desgaste, se reviso
+2026-10-27;B;1;Linea 1;Cambio de formato;Si;20;Cambio de espesor programado
+2026-10-27;B;2;Prensa 2;Mecanica;No;60;Plato con desgaste, se reviso
+2026-10-27;C;1;Debobinadora 1;Mecanica;No;35;Cuchilla desalineada, se ajusto
+2026-10-28;A;1;Debobinadora 1;Atasco de chapa;No;20;Chapa enrollada en rodillo
+2026-10-28;A;2;secador 2 ;Sensor;No;25;Lectura de humedad irregular, se recalibro sensor
+2026-10-28;B;2;Debobinadora 2;Mecanica;No;25;Cuchilla desalineada, se ajusto
+2026-10-28;C;2;Escuadradora;Electrica;No;50;Falla de contactor del motor
+2026-10-28;C;2;Prensa 2;Mecanica;No;10;Plato con desgaste, se reviso
+2026-10-29;A;1;Secador 1;Sensor;No;35;Lectura de humedad irregular, se recalibro sensor
+2026-10-29;A;2;Secador 2;Sensor;No;25;Lectura de humedad irregular, se recalibro sensor
+2026-10-29;B;1;Prensa 1;Hidraulica;No;35;Baja presion hidraulica, se repuso aceite
+2026-10-29;B;2;Lijadora;Mecanica;No;20;Cambio de banda de lija por rotura
+2026-10-29;C;1;Escuadradora;Mecanica;No;20;Sierra con vibracion, cambio de disco
+2026-10-29;C;2;Prensa 2;Hidraulica;No;25;Baja presion hidraulica, se repuso aceite
+2026-10-30;A;2;Secador N°2;Sensor;No;60;Lectura de humedad irregular, se recalibro sensor
+2026-10-30;B;1;Secador 1;Electrica;No;15;Ventilador de zona 3 detenido
+2026-10-30;C;1;Linea 1;Cambio de formato;Si;15;Cambio de espesor programado
+2026-10-30;C;2;Escuadradora;Mecanica;No;60;Sierra con vibracion, cambio de disco
+2026-10-31;A;1;Secador 1;Electrica;No;35;Ventilador de zona 3 detenido
+2026-10-31;A;2;Secador 2;Sensor;No;60;Lectura de humedad irregular, se recalibro sensor
+2026-10-31;B;2;Secador N°2;Sensor;No;15;Lectura de humedad irregular, se recalibro sensor
+2026-10-31;C;1;Prensa 1;Hidraulica;No;30;Baja presion hidraulica, se repuso aceite
+2026-10-31;C;1;Encoladora;Atasco de chapa;No;30;Chapa atascada en entrada
