@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Laboratorio de la sesión 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1F3A5F; --ink: #1B2433; --muted: #5B6270; --rust: #8C4A22; --rust-l: #C8702A;
+  --paper: #F7F5F0; --line: #D9D3C7; --card: #FFFFFF; --user: #E6ECF3;
+  --red: #A8322D; --amber: #C98A1B; --green: #3E7B4F;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+header.top { background: var(--navy); color: #fff; padding: 28px 16px 32px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+header.top .wrap { padding: 0; }
+.brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.brand .logo { background: #fff; border-radius: 10px; padding: 6px 12px; display: inline-flex; }
+.brand img { height: 40px; display: block; }
+.eye { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; color: #E7A774; }
+h1 { font-family: Lora, serif; font-weight: 500; font-size: clamp(28px, 5vw, 40px); line-height: 1.2; margin: 8px 0 10px; }
+header.top p { color: #DCE3EC; margin: 0; max-width: 680px; }
+nav.toc { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; }
+nav.toc a { white-space: nowrap; text-decoration: none; color: var(--navy); font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--user); }
+nav.toc a:hover { background: #D3DDEA; }
+main { padding: 28px 0 60px; }
+section.block { margin-bottom: 40px; scroll-margin-top: 64px; }
+h2 { font-family: Lora, serif; font-weight: 600; font-size: 26px; color: var(--ink); margin: 0 0 6px; }
+h3 { font-size: 18px; color: var(--navy); margin: 26px 0 8px; }
+.kicker { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--rust); font-weight: 600; margin-bottom: 4px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.note { background: #FBF1E6; border: 1px solid #EBCFB2; border-radius: 12px; padding: 14px 18px; margin: 14px 0; }
+.step { display: flex; gap: 14px; margin: 16px 0; }
+.step .n { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-top: 2px; }
+.step .body { flex: 1; min-width: 0; }
+.step p { margin: 0 0 6px; }
+.prompt { position: relative; background: var(--user); border: 1px solid #C9D4E2; border-radius: 12px; padding: 16px 18px 16px; margin: 10px 0; }
+.prompt .lab { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.prompt pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.prompt.kit pre { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14.5px; }
+.copy { margin-top: 12px; border: 0; background: var(--navy); color: #fff; font: 600 14px Inter, sans-serif; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.copy:hover { background: #2A4C78; }
+.copy.ok { background: var(--green); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+th { background: var(--navy); color: #fff; text-align: left; padding: 9px 10px; font-weight: 600; }
+td { border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+.tablewrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+td input, td select, td textarea { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+td textarea { resize: vertical; min-height: 38px; }
+ol.ways { padding-left: 22px; margin: 8px 0; }
+ol.ways li { margin-bottom: 6px; }
+.armador .head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.armador .head b { font-size: 17px; color: var(--navy); }
+.field { margin: 10px 0; }
+.field label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.field textarea, .field select, .field input { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+.field textarea { resize: vertical; min-height: 44px; }
+.field select { width: auto; min-width: 150px; }
+.save { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn2 { border: 1px solid var(--navy); background: #fff; color: var(--navy); font: 600 15px Inter, sans-serif; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.btn2.primary { background: var(--navy); color: #fff; }
+.small { font-size: 14px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 20px 0 40px; font-size: 13px; color: var(--muted); }
+a { color: var(--navy); }
+@media print { nav.toc, .copy, .save { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="logo"><img src="../logo_caphome.png" alt="CapHome"></span></div>
+    <div class="eye">Sesión 3 · Laboratorio</div>
+    <h1>Estructura de una buena instrucción</h1>
+    <p>Esta página es su espacio de trabajo durante la sesión. En esta sesión no se suben archivos. Los textos del kit se copian desde aquí.</p>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#inicio">Antes de empezar</a>
+  <a href="#kit">Textos del kit</a>
+  <a href="#siete">Siete elementos</a>
+  <a href="#p1">Práctica 1</a>
+  <a href="#vueltas">Vueltas</a>
+  <a href="#p2">Práctica 2</a>
+  <a href="#tarea">Para la sesión 4</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="block" id="inicio">
+  <div class="kicker">Antes de empezar</div>
+  <h2>Cómo trabajar en esta página</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Abra la herramienta que prefiera, ChatGPT, Gemini o Claude, con su sesión iniciada.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Tenga a mano el archivo que descargó en la sesión 2, con su instrucción de partida.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Lo que anote se guarda en este navegador. Al final descárguelo con el botón de la última sección.</p></div></div>
+  <div class="note"><b>Nota.</b> Los textos del kit son ficticios. Una nota, una minuta o un correo real de su planta no se pega en una versión gratuita sin pasar por el semáforo.</div>
+</section>
+
+<section class="block" id="kit">
+  <div class="kicker">Textos del kit</div>
+  <h2>Textos de Tableros Quillén</h2>
+  <h3>S3-K01 Notas del supervisor, turno B, línea 2, 21 de octubre</h3>
+  <div class="prompt kit"><pre id="k01">turno B L2 21/10
+trozo 124,2 tablero 55,5 rend 44,7 bajo otra vez
+escuadradora parada 70 min, sierra vibrando de nuevo, se cambio disco. mecanico dice q no es el disco, es el eje
+secador 2 ventilador zona 3 se paro como 15 min, se reinicio y siguio
+falto 1 op en armado (Matias Fuentealba, aviso enfermo), se cubrio con gente de L1 unas 2 hrs
+como a las 23 hrs salio chapa humeda del secador, se reproceso, no se cuantos paquetes
+ojo meta es 52
+avisar a mantencion lo del eje antes del turno A</pre><button class="copy" data-label="Copiar texto">Copiar texto</button></div>
+  <h3>S3-K02 Notas de la reunión de mantención del lunes 26 de octubre</h3>
+  <div class="prompt kit"><pre id="k02">reunion mantencion lunes 26/10, 8:00
+estaban jefe mantencion, jefe produccion, supervisor turno A, encargado bodega
+
+- secador 2 fue lo que mas paro en octubre, casi todo el sensor de humedad. se recalibra casi todos los dias y vuelve a fallar
+- se acuerda cambiar el sensor. jefe mantencion pide cotizacion al proveedor, para el jueves 29
+- bodega no sabe si hay sensor de repuesto, va a revisar. no quedo fecha
+- prensa 2 sigue perdiendo aceite. buscar la fuga en la detencion programada del sabado 31. lo ve el mecanico del turno A
+- escuadradora, el eje de la sierra. jefe mantencion lo revisa esta semana
+- jefe produccion dice que en el registro el secador 2 aparece con 3 nombres distintos. va a dejar una lista cerrada de equipos para el lunes 2
+- proxima reunion lunes 2/11 misma hora</pre><button class="copy" data-label="Copiar texto">Copiar texto</button></div>
+  <h3>S3-K03 Correo de un cliente</h3>
+  <div class="prompt kit"><pre id="k03">De: Compras, Ferretería Los Quillayes SpA
+Asunto: Reclamo despacho 14 de octubre
+
+Estimados,
+En el despacho del 14 de octubre, guía 48213, recibimos 40 tableros contrachapados de 12 mm. Al descargar vimos que 3 tableros tienen las esquinas despegadas. Ya tenemos dos clientes reclamando. Necesitamos que nos repongan los 3 tableros esta semana y que nos digan qué pasó, porque es la segunda vez este año.
+Quedamos atentos.
+Departamento de Compras
+Ferretería Los Quillayes SpA</pre><button class="copy" data-label="Copiar texto">Copiar texto</button></div>
+  <h3>S3-K04 Encargo para un correo al proveedor</h3>
+  <div class="prompt kit"><pre id="k04">Necesito escribirle al proveedor del sensor de humedad del secador 2, Sensórica Andalién SpA.
+Datos que tengo. En octubre el sensor falló 26 veces y sumó 855 minutos de detención. Cada vez se recalibró y volvió a fallar.
+Lo que quiero pedirle. Una visita técnica antes del viernes 6 de noviembre, una cotización de un sensor nuevo y saber si hay una falla conocida de ese modelo.
+Lo firma el jefe de mantención de Tableros Quillén.</pre><button class="copy" data-label="Copiar texto">Copiar texto</button></div>
+</section>
+
+<section class="block" id="siete">
+  <div class="kicker">Siete elementos</div>
+  <h2>Los siete elementos</h2>
+  <div class="tablewrap"><table>
+    <tr><th style="width:24%">Elemento</th><th>Qué responde</th></tr>
+    <tr><td><b>Contexto</b></td><td>Quién soy, qué tengo y qué tiene que saber la herramienta. Aquí va el rol</td></tr>
+    <tr><td><b>Objetivo</b></td><td>Para qué sirve el resultado y a quién</td></tr>
+    <tr><td><b>Tarea</b></td><td>Qué hay que hacer, con un verbo</td></tr>
+    <tr><td><b>Criterios</b></td><td>Cómo se reconoce una buena respuesta</td></tr>
+    <tr><td><b>Restricciones</b></td><td>Lo que no se acepta</td></tr>
+    <tr><td><b>Ejemplos</b></td><td>Una muestra de cómo se ve lo bueno</td></tr>
+    <tr><td><b>Formato</b></td><td>La forma de entrega</td></tr>
+  </table></div>
+  <div class="note">Los criterios sirven dos veces. Al escribir, porque obligan a pensar qué se quiere. Al revisar, porque son la lista con que se comprueba la respuesta.</div>
+  <p>Esta es la instrucción que el relator mostró en la apertura. Péguela seguida de las notas S3-K01 si quiere probarla.</p>
+  <div class="prompt"><div class="lab">Instrucción de la apertura</div><pre>Contexto. Soy jefe de producción de una planta de tableros contrachapados de pino radiata. Estas son las notas que dejó el supervisor del turno B de la línea 2 el 21 de octubre. La meta de rendimiento de la planta es 52 por ciento.
+Objetivo. Que el gerente de planta entienda en un minuto qué pasó en el turno y qué tiene que decidir.
+Tarea. Convierte las notas en un informe de turno.
+Criterios. Las cifras son las de las notas y solo calculas la diferencia con la meta. Cada problema dice qué pasó, cuánto duró y qué se hizo. Lo pendiente queda separado al final.
+Restricciones. No inventes causas, cifras ni cantidades que no estén en las notas. Si falta un dato, escribe por confirmar. No incluyas nombres de personas ni datos de salud.
+Ejemplo. Un problema se escribe así. Prensa 2 detenida 35 minutos por baja presión hidráulica. Se repuso aceite. Queda en observación.
+Formato. Título con fecha, turno y línea. Producción, rendimiento y meta en una tabla. Problemas en viñetas. Pendientes al final. No más de media página.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+</section>
+
+<section class="block" id="p1">
+  <div class="kicker">Práctica 1 · Individual · 30 minutos</div>
+  <h2>Dos casos de Quillén</h2>
+  <p>Elija dos de los cuatro casos. Para cada uno escriba la instrucción con los siete elementos, cópiela con el texto del caso, pruébela en su herramienta, revise la respuesta contra sus criterios y pida un cambio.</p>
+  <div class="tablewrap"><table>
+    <tr><th style="width:10%">Caso</th><th style="width:42%">Texto del kit</th><th>Qué se pide</th></tr>
+    <tr><td>A</td><td>S3-K02, notas de la reunión de mantención</td><td>Minuta con acuerdos, responsables y plazos</td></tr>
+    <tr><td>B</td><td>S3-K03, correo de reclamo de un cliente</td><td>Carta de respuesta al cliente</td></tr>
+    <tr><td>C</td><td>S3-K01, notas del turno B</td><td>Informe de turno, sin copiar el de la apertura</td></tr>
+    <tr><td>D</td><td>S3-K04, encargo de un correo</td><td>Correo al proveedor del sensor</td></tr>
+  </table></div>
+  <div id="casos"></div>
+</section>
+
+<section class="block" id="vueltas">
+  <div class="kicker">Vueltas</div>
+  <h2>Cómo se mejora en vueltas</h2>
+  <p>De la manera más débil a la más fuerte.</p>
+  <ol class="ways">
+    <li><b>"Mejóralo".</b> La herramienta adivina qué mejorar.</li>
+    <li><b>Decir qué está mal y dónde.</b> Por ejemplo, el segundo párrafo promete la reposición, sáquelo.</li>
+    <li><b>Pedirle que se revise contra sus criterios.</b> Revisa tu respuesta contra los criterios de mi instrucción y dime cuál no cumple.</li>
+    <li><b>Volver a la instrucción.</b> Si el mismo error aparece dos veces, el problema está en la instrucción. Corríjala y guarde la versión que funcionó.</li>
+  </ol>
+  <div class="prompt"><div class="lab">Instrucción</div><pre>Revisa tu respuesta contra los criterios de mi instrucción y dime cuál no cumple. Después corrígela.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+</section>
+
+<section class="block" id="p2">
+  <div class="kicker">Práctica 2 · Individual · 43 minutos</div>
+  <h2>Sus tres instrucciones</h2>
+
+  <h3>Parte A. Su instrucción de partida pasa por el revisor, 7 minutos</h3>
+  <div class="card"><b>Mi instrucción de partida, de la sesión 2</b><textarea data-k="ip" style="width:100%;margin-top:8px;border:1px solid var(--line);border-radius:6px;padding:8px;font:15px Inter,sans-serif;min-height:140px"></textarea></div>
+  <div class="prompt"><div class="lab">Revisor de instrucciones</div><pre id="revisor">Revisa la instrucción que te pego al final. Dime cuáles de estos siete elementos tiene y cuáles le faltan o están débiles. Contexto, objetivo, tarea, criterios, restricciones, ejemplos y formato.
+Para cada uno que falte o esté débil, hazme una pregunta que me ayude a completarlo.
+No reescribas la instrucción. La escribo yo.
+La instrucción es la siguiente.</pre><button class="copy" id="copyrev" data-label="Copiar revisor con mi instrucción">Copiar revisor con mi instrucción</button></div>
+
+  <h3>Parte B. Tres instrucciones propias, 30 minutos</h3>
+  <p>Escriba tres instrucciones para sus dos tareas de la sesión 2. Pueden ser una por tarea y una tercera para un paso de la tarea que desarmó, o tres pasos de la misma tarea. Pruébelas con un ejemplo inventado o ficticio, nunca con datos reales.</p>
+  <div id="propias"></div>
+
+  <h3>Parte C. Lo que cambió, 3 minutos</h3>
+  <div class="card"><b>Compare su instrucción de partida con la instrucción 1. ¿Qué elementos le faltaban y qué mejoró en la respuesta?</b><textarea data-k="cambio" style="width:100%;margin-top:8px;border:1px solid var(--line);border-radius:6px;padding:8px;font:15px Inter,sans-serif;min-height:100px"></textarea></div>
+</section>
+
+<section class="block" id="tarea">
+  <div class="kicker">Para la sesión 4</div>
+  <h2>Antes de la próxima sesión</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Pruebe sus tres instrucciones durante la semana con ejemplos ficticios y anote qué tuvo que corregir.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Llegue con ellas descargadas. En la sesión 4 se encadenan y pasan a su biblioteca.</p></div></div>
+  <div class="card">
+    <h3 style="margin-top:0">Guardar lo que anotó</h3>
+    <p class="small">Lo que escribió queda guardado en este navegador. Descárguelo para conservarlo.</p>
+    <div class="save">
+      <button class="btn2 primary" id="dl">Descargar mis respuestas</button>
+      <button class="btn2" id="pr">Imprimir o guardar en PDF</button>
+      <button class="btn2" id="clr">Borrar lo anotado</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  Curso de IA para Tulsa · Material del participante · Todo nombre, cifra y documento de los textos de práctica es ficticio.<br>
+  Fuentes. Guías de prompting de OpenAI, Anthropic, Google y Microsoft, según la bibliografía del curso.
+</div></footer>
+
+<script>
+(function () {
+  var KEY = 'lab-s3-tulsa';
+  var ELEM = ['Contexto', 'Objetivo', 'Tarea', 'Criterios', 'Restricciones', 'Ejemplos', 'Formato'];
+  var KIT = { A: 'k02', B: 'k03', C: 'k01', D: 'k04' };
+
+  function fields(pre) {
+    return ELEM.map(function (e, i) {
+      return '<div class="field"><label>' + e + '</label><textarea data-k="' + pre + 'e' + i + '"></textarea></div>';
+    }).join('');
+  }
+  var casos = document.getElementById('casos');
+  [1, 2].forEach(function (n) {
+    var d = document.createElement('div');
+    d.className = 'card armador';
+    d.innerHTML = '<div class="head"><b>Caso ' + n + '</b><select data-k="c' + n + 'case" aria-label="Caso ' + n + '"><option value="">Elija el caso</option><option>A</option><option>B</option><option>C</option><option>D</option></select></div>' +
+      fields('c' + n) +
+      '<button class="copy" data-armar="c' + n + '" data-kit="1" data-label="Armar y copiar">Armar y copiar</button>' +
+      '<div class="field" style="margin-top:16px"><label>¿Qué criterio no cumplió la primera respuesta?</label><textarea data-k="c' + n + 'nc"></textarea></div>' +
+      '<div class="field"><label>¿Qué pedí cambiar?</label><textarea data-k="c' + n + 'pc"></textarea></div>';
+    casos.appendChild(d);
+  });
+  var propias = document.getElementById('propias');
+  [1, 2, 3].forEach(function (n) {
+    var d = document.createElement('div');
+    d.className = 'card armador';
+    d.innerHTML = '<div class="head"><b>Instrucción ' + n + '</b></div>' +
+      '<div class="field"><label>Para qué tarea</label><textarea data-k="i' + n + 't"></textarea></div>' +
+      fields('i' + n) +
+      '<button class="copy" data-armar="i' + n + '" data-label="Armar y copiar">Armar y copiar</button>';
+    propias.appendChild(d);
+  });
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+
+  document.querySelectorAll('[data-k]').forEach(function (el) {
+    var k = el.getAttribute('data-k');
+    if (state[k] != null) el.value = state[k];
+    var save = function () {
+      state[k] = el.value;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    };
+    el.addEventListener('input', save);
+    el.addEventListener('change', save);
+  });
+
+  function v(k) { return (state[k] || '').trim(); }
+  function armar(pre) {
+    var L = [];
+    ELEM.forEach(function (e, i) { var t = v(pre + 'e' + i); if (t) L.push(e + '. ' + t); });
+    return L.join('\n');
+  }
+  function textOf(id) { return document.getElementById(id).textContent; }
+
+  function flash(b, msg, ok) {
+    var t = b.getAttribute('data-label');
+    b.textContent = msg; if (ok) b.classList.add('ok');
+    setTimeout(function () { b.textContent = t; b.classList.remove('ok'); }, 1600);
+  }
+  function copy(b, text) {
+    var done = function () { flash(b, 'Copiado', true); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+    } else { fallback(text); done(); }
+  }
+  function fallback(text) {
+    var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+    ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta);
+  }
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var pre = b.getAttribute('data-armar');
+      if (b.id === 'copyrev') {
+        copy(b, textOf('revisor') + '\n' + (state.ip || ''));
+      } else if (pre) {
+        var text = armar(pre);
+        if (b.getAttribute('data-kit')) {
+          var c = v(pre + 'case');
+          if (!c) { flash(b, 'Elija el caso', false); return; }
+          text += '\n\nEl texto es el siguiente.\n' + textOf(KIT[c]);
+        }
+        copy(b, text);
+      } else {
+        copy(b, b.parentNode.querySelector('pre').textContent);
+      }
+    });
+  });
+
+  document.getElementById('dl').addEventListener('click', function () {
+    var L = [];
+    L.push('Curso de IA para Tulsa. Sesión 3. Mis respuestas', '');
+    L.push('PRÁCTICA 1. DOS CASOS DE QUILLÉN');
+    [1, 2].forEach(function (n) {
+      L.push('', 'Caso ' + n + '. ' + v('c' + n + 'case'));
+      ELEM.forEach(function (e, i) { L.push(e + '. ' + v('c' + n + 'e' + i)); });
+      L.push('¿Qué criterio no cumplió la primera respuesta? ' + v('c' + n + 'nc'));
+      L.push('¿Qué pedí cambiar? ' + v('c' + n + 'pc'));
+    });
+    L.push('', 'PRÁCTICA 2. PARTE A. MI INSTRUCCIÓN DE PARTIDA', v('ip'));
+    L.push('', 'PARTE B. MIS TRES INSTRUCCIONES');
+    [1, 2, 3].forEach(function (n) {
+      L.push('', 'Instrucción ' + n + '. Para qué tarea. ' + v('i' + n + 't'));
+      ELEM.forEach(function (e, i) { L.push(e + '. ' + v('i' + n + 'e' + i)); });
+    });
+    L.push('', 'PARTE C. LO QUE CAMBIÓ', v('cambio'));
+    var blob = new Blob([L.join('\n')], { type: 'text/plain;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Sesion_03_Mis_respuestas.txt';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  });
+  document.getElementById('pr').addEventListener('click', function () { window.print(); });
+  var clr = document.getElementById('clr'), armed = false;
+  clr.addEventListener('click', function () {
+    if (!armed) { armed = true; clr.textContent = 'Confirmar borrado'; setTimeout(function () { armed = false; clr.textContent = 'Borrar lo anotado'; }, 4000); return; }
+    armed = false; clr.textContent = 'Borrar lo anotado';
+    state = {}; try { localStorage.removeItem(KEY); } catch (e) {}
+    document.querySelectorAll('[data-k]').forEach(function (el) { el.value = ''; });
+  });
+})();
+</script>
+</body>
+</html>
