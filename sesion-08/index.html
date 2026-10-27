@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Laboratorio de la sesión 8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1F3A5F; --ink: #1B2433; --muted: #5B6270; --rust: #8C4A22; --rust-l: #C8702A;
+  --paper: #F7F5F0; --line: #D9D3C7; --card: #FFFFFF; --user: #E6ECF3;
+  --red: #A8322D; --amber: #C98A1B; --green: #3E7B4F;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+header.top { background: var(--navy); color: #fff; padding: 28px 16px 32px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+header.top .wrap { padding: 0; }
+.brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.brand .logo { background: #fff; border-radius: 10px; padding: 6px 12px; display: inline-flex; }
+.brand img { height: 40px; display: block; }
+.eye { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; color: #E7A774; }
+h1 { font-family: Lora, serif; font-weight: 500; font-size: clamp(28px, 5vw, 40px); line-height: 1.2; margin: 8px 0 10px; }
+header.top p { color: #DCE3EC; margin: 0; max-width: 680px; }
+nav.toc { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; }
+nav.toc a { white-space: nowrap; text-decoration: none; color: var(--navy); font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--user); }
+nav.toc a:hover { background: #D3DDEA; }
+main { padding: 28px 0 60px; }
+section.block { margin-bottom: 40px; scroll-margin-top: 64px; }
+h2 { font-family: Lora, serif; font-weight: 600; font-size: 26px; color: var(--ink); margin: 0 0 6px; }
+h3 { font-size: 18px; color: var(--navy); margin: 26px 0 8px; }
+.kicker { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--rust); font-weight: 600; margin-bottom: 4px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.note { background: #FBF1E6; border: 1px solid #EBCFB2; border-radius: 12px; padding: 14px 18px; margin: 14px 0; }
+.step { display: flex; gap: 14px; margin: 16px 0; }
+.step .n { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-top: 2px; }
+.step .body { flex: 1; min-width: 0; }
+.step p { margin: 0 0 6px; }
+.prompt { position: relative; background: var(--user); border: 1px solid #C9D4E2; border-radius: 12px; padding: 16px 18px 16px; margin: 10px 0; }
+.prompt .lab { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.prompt pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.prompt.kit pre { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14.5px; }
+.copy { margin-top: 12px; border: 0; background: var(--navy); color: #fff; font: 600 14px Inter, sans-serif; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.copy:hover { background: #2A4C78; }
+.copy.ok { background: var(--green); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+th { background: var(--navy); color: #fff; text-align: left; padding: 9px 10px; font-weight: 600; }
+td { border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+.tablewrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+td input, td select, td textarea { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+td textarea { resize: vertical; min-height: 38px; }
+ol.ways { padding-left: 22px; margin: 8px 0; }
+ol.ways li { margin-bottom: 6px; }
+.armador .head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.armador .head b { font-size: 17px; color: var(--navy); }
+.field { margin: 10px 0; }
+.field label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.field textarea, .field select, .field input { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+.field textarea { resize: vertical; min-height: 44px; }
+.field select { width: auto; min-width: 150px; }
+.save { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn2 { border: 1px solid var(--navy); background: #fff; color: var(--navy); font: 600 15px Inter, sans-serif; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.btn2.primary { background: var(--navy); color: #fff; }
+.small { font-size: 14px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 20px 0 40px; font-size: 13px; color: var(--muted); }
+a { color: var(--navy); }
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.file { display: flex; flex-direction: column; gap: 2px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--ink); }
+.file:hover { border-color: var(--navy); }
+.file b { font-size: 15px; }
+.file span { font-size: 13px; color: var(--muted); }
+.file .dl { color: var(--navy); font-weight: 600; font-size: 13px; margin-top: 4px; }
+details.fold { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; margin: 14px 0; }
+details.fold summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+.rot { margin-top: 30px; }
+.field select { max-width: 100%; }
+.calc { font-weight: 700; color: var(--navy); }
+.amber { color: var(--amber); font-weight: 600; margin-top: 8px; }
+td input[type=number] { min-width: 70px; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 15px; font-weight: 600; color: var(--navy); margin-top: 10px; }
+.check input { width: 18px; height: 18px; }
+.btnrow { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+.pres { min-height: 0; }
+.pres .ph { display: flex; gap: 16px; align-items: baseline; margin-bottom: 6px; }
+.pres .pn { font-family: Lora, serif; font-size: 40px; color: var(--rust); line-height: 1; }
+.pres .pt { font-family: Lora, serif; font-size: 24px; font-weight: 600; color: var(--navy); }
+.pres .ps { font-size: 16px; color: var(--muted); margin: 0 0 6px; }
+.pres textarea { min-height: 120px; font-size: 17px; }
+.scores { display: flex; gap: 14px; flex-wrap: wrap; }
+.scores .field { flex: 1 1 160px; }
+.clock { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.clock .t { font-family: Lora, serif; font-size: 56px; font-weight: 600; color: var(--navy); min-width: 150px; font-variant-numeric: tabular-nums; }
+.clock .t.amber { color: var(--amber); }
+.clock .t.red { color: var(--red); }
+.rules { font-family: Lora, serif; font-size: 20px; color: var(--navy); }
+@media print { nav.toc, .copy, .save { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="logo"><img src="../logo_caphome.png" alt="CapHome"></span></div>
+    <div class="eye">Sesión 8 · Laboratorio</div>
+    <h1>Presentación de casos y plan de adopción</h1>
+    <p>Hoy presenta su caso. Esta página le ordena los siete puntos y le sirve de pantalla para presentar.</p>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#inicio">Antes de empezar</a>
+  <a href="#comparacion">Comparación</a>
+  <a href="#presentacion">Su presentación</a>
+  <a href="#plan">Plan a 30 días</a>
+  <a href="#lleva">Lo que se lleva</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="block" id="inicio">
+  <div class="kicker">Antes de empezar</div>
+  <h2>Cómo trabajar en esta página</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Tenga a mano su instrucción de partida, la última, el archivo de la sesión 7 y su plan.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Abra la herramienta que prefiera, solo para el evaluador.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Lo que anote se guarda en este navegador. Al final descárguelo.</p></div></div>
+</section>
+
+<section class="block" id="comparacion">
+  <div class="kicker">Práctica 1 · 10 minutos</div>
+  <h2>Su comparación</h2>
+  <div class="card">
+    <div class="field"><label>Mi instrucción de partida</label><textarea data-k="ini" style="min-height:140px"></textarea></div>
+    <div class="field"><label>Mi última instrucción</label><textarea data-k="ult" style="min-height:220px"></textarea></div>
+  </div>
+  <div class="prompt"><div class="lab">Evaluador</div><pre id="eval">Te pego dos instrucciones que escribí para la misma tarea, la primera al comienzo de un curso y la segunda al final.
+Evalúa cada una con estos siete elementos. Contexto, objetivo, tarea, criterios, restricciones, ejemplos y formato.
+Para cada elemento pon 0 si no está, 1 si está débil y 2 si está completo, con una frase que diga por qué.
+Responde en una tabla con las columnas Elemento, Primera, Segunda y Por qué.
+Al final suma los puntos de cada una sobre 14 y di en dos líneas qué mejoró más.
+No reescribas ninguna de las dos.
+Primera instrucción.
+
+Segunda instrucción.
+</pre><button class="copy" id="copyeval" data-label="Copiar evaluador con mis dos instrucciones">Copiar evaluador con mis dos instrucciones</button></div>
+  <div class="card">
+    <div class="scores">
+      <div class="field"><label>Puntaje de la primera</label><input data-k="s1" placeholder="de 14"></div>
+      <div class="field"><label>Puntaje de la segunda</label><input data-k="s2" placeholder="de 14"></div>
+    </div>
+    <div class="field"><label>Lo que más mejoró</label><textarea data-k="mejoro" style="min-height:60px"></textarea></div>
+  </div>
+  <div class="note">El puntaje de la herramienta no es su nota. La nota la pone el relator con la pauta.</div>
+</section>
+
+<section class="block" id="presentacion">
+  <div class="kicker">Su presentación · 3 minutos</div>
+  <h2>Los siete puntos</h2>
+  <p>Siga este orden, que son los siete criterios de la pauta.</p>
+  <div class="card pres" id="punto1"><div class="ph"><span class="pn">1</span><span class="pt">La tarea</span></div><p class="ps">Cuántas veces al mes y cuánto toma hoy</p><textarea data-k="k1" aria-label="Lo que va a mostrar en el punto 1"></textarea></div>
+  <div class="card pres" id="punto2"><div class="ph"><span class="pn">2</span><span class="pt">El flujo</span></div><p class="ps">El paso donde decide una persona</p><textarea data-k="k2" aria-label="Lo que va a mostrar en el punto 2"></textarea></div>
+  <div class="card pres" id="punto3"><div class="ph"><span class="pn">3</span><span class="pt">Las instrucciones</span></div><p class="ps">La de partida contra la última, con la tabla del evaluador</p><div class="scores"><div class="field"><label>Puntaje de la primera</label><input id="m1" readonly aria-label="Puntaje de la primera"></div><div class="field"><label>Puntaje de la segunda</label><input id="m2" readonly aria-label="Puntaje de la segunda"></div></div><textarea data-k="k3" aria-label="Lo que va a mostrar en el punto 3"></textarea></div>
+  <div class="card pres" id="punto4"><div class="ph"><span class="pn">4</span><span class="pt">La verificación</span></div><p class="ps">Cómo comprobó lo que entrega la herramienta, con un ejemplo</p><textarea data-k="k4" aria-label="Lo que va a mostrar en el punto 4"></textarea></div>
+  <div class="card pres" id="punto5"><div class="ph"><span class="pn">5</span><span class="pt">Los datos</span></div><p class="ps">Su semáforo y el caso ficticio</p><textarea data-k="k5" aria-label="Lo que va a mostrar en el punto 5"></textarea></div>
+  <div class="card pres" id="punto6"><div class="ph"><span class="pn">6</span><span class="pt">El asistente</span></div><p class="ps">Sus tres pruebas</p><textarea data-k="k6" aria-label="Lo que va a mostrar en el punto 6"></textarea></div>
+  <div class="card pres" id="punto7"><div class="ph"><span class="pn">7</span><span class="pt">El ahorro y el plan</span></div><p class="ps">Minutos al mes y las tres prácticas</p><textarea data-k="k7" aria-label="Lo que va a mostrar en el punto 7"></textarea></div>
+  <div class="card" id="reloj">
+    <div class="clock"><span class="t" id="clock">3:00</span>
+      <button class="btn2 primary" id="start">Iniciar</button>
+      <button class="btn2" id="reset">Reiniciar</button></div>
+  </div>
+  <p class="small">Mientras otros presentan, escriba en el chat una cosa que le sirva para su propio trabajo.</p>
+</section>
+
+<section class="block" id="plan">
+  <div class="kicker">Práctica 2 · 10 minutos</div>
+  <h2>El plan a 30 días</h2>
+  <p>Ajuste su plan con los comentarios que recibió y páselo por esta revisión.</p>
+  <div class="tablewrap"><table>
+    <tr><th style="min-width:200px">Práctica</th><th style="min-width:120px">Fecha</th><th style="min-width:140px">Dato y color</th><th style="min-width:160px">Cómo lo mide</th></tr>
+    <tr><td><input data-k="p1a" aria-label="Práctica 1"></td><td><input data-k="p1f" aria-label="Fecha 1"></td><td><input data-k="p1d" aria-label="Dato y color 1"></td><td><input data-k="p1m" aria-label="Cómo lo mide 1"></td></tr><tr><td><input data-k="p2a" aria-label="Práctica 2"></td><td><input data-k="p2f" aria-label="Fecha 2"></td><td><input data-k="p2d" aria-label="Dato y color 2"></td><td><input data-k="p2m" aria-label="Cómo lo mide 2"></td></tr><tr><td><input data-k="p3a" aria-label="Práctica 3"></td><td><input data-k="p3f" aria-label="Fecha 3"></td><td><input data-k="p3d" aria-label="Dato y color 3"></td><td><input data-k="p3m" aria-label="Cómo lo mide 3"></td></tr>
+  </table></div>
+  <div class="prompt"><div class="lab">Revisión del plan</div><pre id="rev">Revisa mi plan de adopción a 30 días, que te pego al final.
+Para cada práctica dime si tiene una fecha concreta, si dice con qué dato trabaja y si se puede medir con un número.
+Si alguna no cumple, hazme una pregunta para completarla. No reescribas el plan.
+El plan es el siguiente.</pre><button class="copy" id="copyrev" data-label="Copiar revisión con mi plan">Copiar revisión con mi plan</button></div>
+</section>
+
+<section class="block" id="lleva">
+  <div class="kicker">Lo que se lleva</div>
+  <h2>Lo que se lleva del curso</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Sesión</th><th>Lo que queda</th></tr>
+    <tr><td>1</td><td>Su semáforo de datos</td></tr><tr><td>2</td><td>Su instrucción de partida y sus dos tareas</td></tr><tr><td>3</td><td>La estructura de siete elementos</td></tr><tr><td>4</td><td>Su biblioteca de cinco instrucciones y el verificador</td></tr><tr><td>5</td><td>Cuatro casos resueltos de la planta</td></tr><tr><td>6</td><td>Su flujo probado y el generador de casos ficticios</td></tr><tr><td>7</td><td>Su asistente</td></tr><tr><td>8</td><td>Su plan a 30 días</td></tr>
+  </table></div>
+  <h3>Tres reglas para seguir solo</h3>
+  <div class="step"><div class="n">1</div><div class="body"><p class="rules">El dato decide la herramienta.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p class="rules">Todo se comprueba antes de usarlo.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p class="rules">La decisión y la firma son de una persona.</p></div></div>
+  <p>Así se evalúa su caso: <a href="../pauta/">la pauta de evaluación</a>.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Guardar lo que anotó</h3>
+    <p class="small">Lo que escribió queda guardado en este navegador. Descárguelo para conservarlo.</p>
+    <div class="save">
+      <button class="btn2 primary" id="dl">Descargar mi caso final</button>
+      <button class="btn2" id="pr">Imprimir o guardar en PDF</button>
+      <button class="btn2" id="clr">Borrar lo anotado</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  Curso de IA para Tulsa · Material del participante.
+</div></footer>
+
+<script>
+(function () {
+  var KEY = 'lab-s8-tulsa';
+  var HEAD6 = "Te pego dos instrucciones que escribí para la misma tarea, la primera al comienzo de un curso y la segunda al final.\nEvalúa cada una con estos siete elementos. Contexto, objetivo, tarea, criterios, restricciones, ejemplos y formato.\nPara cada elemento pon 0 si no está, 1 si está débil y 2 si está completo, con una frase que diga por qué.\nResponde en una tabla con las columnas Elemento, Primera, Segunda y Por qué.\nAl final suma los puntos de cada una sobre 14 y di en dos líneas qué mejoró más.\nNo reescribas ninguna de las dos.";
+  var PUNTOS = ["La tarea", "El flujo", "Las instrucciones", "La verificación", "Los datos", "El asistente", "El ahorro y el plan"];
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+
+  function persist() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function v(k) { return (state[k] || '').trim(); }
+  function mirror() {
+    document.getElementById('m1').value = v('s1');
+    document.getElementById('m2').value = v('s2');
+  }
+  document.querySelectorAll('[data-k]').forEach(function (el) {
+    var k = el.getAttribute('data-k');
+    if (state[k] != null) el.value = state[k];
+    var save = function () { state[k] = el.value; persist(); mirror(); };
+    el.addEventListener('input', save);
+    el.addEventListener('change', save);
+  });
+  mirror();
+
+  function plan() {
+    var L = [];
+    for (var i = 1; i <= 3; i++) {
+      L.push(i + '. ' + v('p' + i + 'a') + ' | Fecha ' + v('p' + i + 'f') + ' | Dato y color ' + v('p' + i + 'd') + ' | Cómo lo mide ' + v('p' + i + 'm'));
+    }
+    return L.join('\n');
+  }
+
+  function flash(b, msg, ok) {
+    var t = b.getAttribute('data-label');
+    b.textContent = msg; if (ok) b.classList.add('ok');
+    setTimeout(function () { b.textContent = t; b.classList.remove('ok'); }, 1600);
+  }
+  function copy(b, text) {
+    var done = function () { flash(b, 'Copiado', true); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+    } else { fallback(text); done(); }
+  }
+  function fallback(text) {
+    var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+    ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta);
+  }
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.id === 'copyeval') {
+        copy(b, [HEAD6, 'Primera instrucción.', state.ini || '', 'Segunda instrucción.', state.ult || ''].join('\n'));
+      } else if (b.id === 'copyrev') {
+        copy(b, document.getElementById('rev').textContent + '\n' + plan());
+      } else {
+        copy(b, b.parentNode.querySelector('pre').textContent);
+      }
+    });
+  });
+
+  var TOTAL = 180, clock = document.getElementById('clock'), t0 = null, timer = null;
+  function show(left) {
+    var s = Math.max(0, Math.ceil(left));
+    clock.textContent = Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+    clock.classList.toggle('amber', s > 0 && s <= 60);
+    clock.classList.toggle('red', s === 0);
+  }
+  function tick() {
+    var left = TOTAL - (Date.now() - t0) / 1000;
+    show(left);
+    if (left <= 0) { clearInterval(timer); timer = null; }
+  }
+  document.getElementById('start').addEventListener('click', function () {
+    if (timer) return;
+    t0 = Date.now(); timer = setInterval(tick, 250); tick();
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    if (timer) { clearInterval(timer); timer = null; }
+    show(TOTAL);
+  });
+
+  document.getElementById('dl').addEventListener('click', function () {
+    var L = [];
+    L.push('Curso de IA para Tulsa. Sesión 8. Mi caso final', '');
+    L.push('PRÁCTICA 1. SU COMPARACIÓN');
+    L.push('Mi instrucción de partida.', v('ini'), 'Mi última instrucción.', v('ult'));
+    L.push('Puntaje de la primera. ' + v('s1'), 'Puntaje de la segunda. ' + v('s2'), 'Lo que más mejoró. ' + v('mejoro'), '');
+    L.push('SU PRESENTACIÓN');
+    PUNTOS.forEach(function (p, i) { L.push((i + 1) + '. ' + p + '.', v('k' + (i + 1))); });
+    L.push('', 'PLAN A 30 DÍAS', plan());
+    var blob = new Blob([L.join('\n')], { type: 'text/plain;charset=utf-8' });
+    var el = document.createElement('a'); el.href = URL.createObjectURL(blob); el.download = 'Sesion_08_Mi_caso_final.txt';
+    document.body.appendChild(el); el.click(); document.body.removeChild(el);
+  });
+  document.getElementById('pr').addEventListener('click', function () { window.print(); });
+  var clr = document.getElementById('clr'), armed = false;
+  clr.addEventListener('click', function () {
+    if (!armed) { armed = true; clr.textContent = 'Confirmar borrado'; setTimeout(function () { armed = false; clr.textContent = 'Borrar lo anotado'; }, 4000); return; }
+    armed = false; clr.textContent = 'Borrar lo anotado';
+    state = {}; try { localStorage.removeItem(KEY); } catch (e) {}
+    document.querySelectorAll('[data-k]').forEach(function (el) { el.value = ''; });
+    mirror();
+  });
+})();
+</script>
+</body>
+</html>
