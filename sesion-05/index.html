@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Laboratorio de la sesión 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1F3A5F; --ink: #1B2433; --muted: #5B6270; --rust: #8C4A22; --rust-l: #C8702A;
+  --paper: #F7F5F0; --line: #D9D3C7; --card: #FFFFFF; --user: #E6ECF3;
+  --red: #A8322D; --amber: #C98A1B; --green: #3E7B4F;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+header.top { background: var(--navy); color: #fff; padding: 28px 16px 32px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+header.top .wrap { padding: 0; }
+.brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.brand .logo { background: #fff; border-radius: 10px; padding: 6px 12px; display: inline-flex; }
+.brand img { height: 40px; display: block; }
+.eye { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; color: #E7A774; }
+h1 { font-family: Lora, serif; font-weight: 500; font-size: clamp(28px, 5vw, 40px); line-height: 1.2; margin: 8px 0 10px; }
+header.top p { color: #DCE3EC; margin: 0; max-width: 680px; }
+nav.toc { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; }
+nav.toc a { white-space: nowrap; text-decoration: none; color: var(--navy); font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--user); }
+nav.toc a:hover { background: #D3DDEA; }
+main { padding: 28px 0 60px; }
+section.block { margin-bottom: 40px; scroll-margin-top: 64px; }
+h2 { font-family: Lora, serif; font-weight: 600; font-size: 26px; color: var(--ink); margin: 0 0 6px; }
+h3 { font-size: 18px; color: var(--navy); margin: 26px 0 8px; }
+.kicker { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--rust); font-weight: 600; margin-bottom: 4px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.note { background: #FBF1E6; border: 1px solid #EBCFB2; border-radius: 12px; padding: 14px 18px; margin: 14px 0; }
+.step { display: flex; gap: 14px; margin: 16px 0; }
+.step .n { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-top: 2px; }
+.step .body { flex: 1; min-width: 0; }
+.step p { margin: 0 0 6px; }
+.prompt { position: relative; background: var(--user); border: 1px solid #C9D4E2; border-radius: 12px; padding: 16px 18px 16px; margin: 10px 0; }
+.prompt .lab { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.prompt pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.prompt.kit pre { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14.5px; }
+.copy { margin-top: 12px; border: 0; background: var(--navy); color: #fff; font: 600 14px Inter, sans-serif; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.copy:hover { background: #2A4C78; }
+.copy.ok { background: var(--green); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+th { background: var(--navy); color: #fff; text-align: left; padding: 9px 10px; font-weight: 600; }
+td { border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+.tablewrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+td input, td select, td textarea { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+td textarea { resize: vertical; min-height: 38px; }
+ol.ways { padding-left: 22px; margin: 8px 0; }
+ol.ways li { margin-bottom: 6px; }
+.armador .head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.armador .head b { font-size: 17px; color: var(--navy); }
+.field { margin: 10px 0; }
+.field label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.field textarea, .field select, .field input { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+.field textarea { resize: vertical; min-height: 44px; }
+.field select { width: auto; min-width: 150px; }
+.save { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn2 { border: 1px solid var(--navy); background: #fff; color: var(--navy); font: 600 15px Inter, sans-serif; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.btn2.primary { background: var(--navy); color: #fff; }
+.small { font-size: 14px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 20px 0 40px; font-size: 13px; color: var(--muted); }
+a { color: var(--navy); }
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.file { display: flex; flex-direction: column; gap: 2px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--ink); }
+.file:hover { border-color: var(--navy); }
+.file b { font-size: 15px; }
+.file span { font-size: 13px; color: var(--muted); }
+.file .dl { color: var(--navy); font-weight: 600; font-size: 13px; margin-top: 4px; }
+details.fold { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; margin: 14px 0; }
+details.fold summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+.rot { margin-top: 30px; }
+.field select { max-width: 100%; }
+@media print { nav.toc, .copy, .save { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="logo"><img src="../logo_caphome.png" alt="CapHome"></span></div>
+    <div class="eye">Sesión 5 · Laboratorio</div>
+    <h1>Casos de una empresa industrial</h1>
+    <p>Cuatro casos de la planta, uno detrás de otro. Cada instrucción tiene un botón para copiarla.</p>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#inicio">Antes de empezar</a>
+  <a href="#archivos">Archivos</a>
+  <a href="#riesgos">Cuatro riesgos</a>
+  <a href="#c1">Caso 1</a>
+  <a href="#c2">Caso 2</a>
+  <a href="#c3">Caso 3</a>
+  <a href="#c4">Caso 4</a>
+  <a href="#alertas">Alertas</a>
+  <a href="#tarea">Para la sesión 6</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="block" id="inicio">
+  <div class="kicker">Antes de empezar</div>
+  <h2>Cómo trabajar en esta página</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Abra la herramienta que prefiera, con su sesión iniciada.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Solo se sube un archivo, la planilla. Los demás textos se copian desde esta página.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Lo que anote se guarda en este navegador. Al final descárguelo.</p></div></div>
+</section>
+
+<section class="block" id="archivos">
+  <div class="kicker">Archivos</div>
+  <h2>Archivos y textos de la sesión</h2>
+  <div class="files">
+    <a class="file" href="kit/S5-K01_Produccion_mermas_octubre.xlsx" download><b>S5-K01 Producción y mermas de octubre</b><span>Excel</span><span class="dl">Descargar</span></a>
+    <a class="file" href="kit/S5-K01_Produccion_mermas_octubre.csv" download><b>S5-K01 Producción y mermas de octubre</b><span>CSV</span><span class="dl">Descargar</span></a>
+  </div>
+  <h3>S5-K02 Procedimiento de gestión de la energía</h3>
+  <div class="prompt kit"><pre id="k02">TABLEROS QUILLÉN S.A.
+Procedimiento PG-EN-01. Gestión de la energía
+Versión 2, agosto de 2026. Basado en los principios de la norma ISO 50001.
+
+1. Objetivo
+Establecer cómo la planta mide, revisa y mejora su consumo de energía.
+
+2. Alcance
+Aplica a las líneas 1 y 2 de producción, a los secadores y a las calderas.
+
+3. Responsabilidades
+3.1. El gerente de planta debe aprobar cada año la política energética y las metas de energía.
+3.2. El jefe de producción debe informar cada mes el consumo de energía eléctrica por m3 de tablero de cada línea, y se recomienda incluir la comparación con el mismo mes del año anterior.
+3.3. El jefe de mantención debe registrar cada intervención en equipos que consumen más de 50 kW.
+
+4. Indicadores
+4.1. El indicador principal es el consumo de energía eléctrica en kWh por m3 de tablero, por línea y por mes.
+4.2. Se recomienda agregar un indicador de consumo térmico cuando la caldera tenga medidor propio.
+
+5. Línea base y metas
+5.1. La línea base debe calcularse con al menos 12 meses de datos.
+5.2. La meta anual debe expresarse como una reducción del indicador principal respecto de la línea base.
+5.3. Se recomienda revisar las metas cada seis meses.
+
+6. Revisión
+6.1. La gerencia debe revisar el desempeño energético al menos una vez al año.
+6.2. Se recomienda una revisión trimestral con los jefes de área.
+
+7. Auditoría
+7.1. Debe realizarse una auditoría interna del procedimiento una vez al año.
+7.2. Se recomienda evaluar la certificación del sistema por un organismo externo.
+
+8. Capacitación
+8.1. Se recomienda capacitar a los operadores de secadores y calderas en uso eficiente de la energía.</pre><button class="copy" data-label="Copiar texto">Copiar texto</button></div>
+  <h3>S5-K03 Encargo para un correo en inglés</h3>
+  <div class="prompt kit"><pre id="k03">Necesito escribirle a Tamesfield Timber Ltd, nuestro cliente en el Reino Unido.
+Tienen un pedido de 2 contenedores de tablero MDO 23/32 con embarque programado para el 14 de noviembre.
+El embarque se atrasa una semana, al 21 de noviembre, porque vamos a hacer una mantención en un secador. La fecha nueva todavía no está confirmada por la naviera.
+Les podemos ofrecer embarcar 1 contenedor el 14 de noviembre y el otro el 21.
+Lo firma el jefe comercial de exportaciones de Tableros Quillén.</pre><button class="copy" data-label="Copiar texto">Copiar texto</button></div>
+  <h3>S5-K04 Notas para el reporte mensual</h3>
+  <div class="prompt kit"><pre id="k04">para el reporte de octubre a gerencia
+- se cambia el sensor de humedad del secador 2, cotizacion pedida, llega la proxima semana
+- prensa 2: se encontro la fuga el sabado 31, manguera del cilindro, cambiada
+- embarque tamesfield atrasado una semana por la mantencion del secador, se ofrecio embarque parcial
+- lista cerrada de equipos en el registro de detenciones desde el 2/11
+- ojo: el reporte va con las cifras de la planilla, nada de estimaciones</pre><button class="copy" data-label="Copiar texto">Copiar texto</button></div>
+</section>
+
+<section class="block" id="riesgos">
+  <div class="kicker">Cuatro riesgos</div>
+  <h2>Cuatro casos, cuatro riesgos</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Caso</th><th>Qué se hace</th><th>Riesgo principal</th><th>Cómo se comprueba</th></tr>
+    <tr><td>1. Planilla</td><td>Llegar a una conclusión de gestión</td><td>Un cálculo mal hecho o una causa inventada</td><td>Filtro de Excel y calculadora</td></tr>
+    <tr><td>2. Norma o procedimiento</td><td>Separar lo que exige de lo que recomienda</td><td>Que agregue un requisito que no existe</td><td>Buscar la palabra debe en el texto</td></tr>
+    <tr><td>3. Correo en inglés</td><td>Redactar y revisar</td><td>Que diga algo distinto de lo que se quería</td><td>Pedir la traducción de vuelta al español</td></tr>
+    <tr><td>4. Reporte</td><td>Juntar cifras y notas en una página</td><td>Que agregue cifras de otra fuente</td><td>Cada cifra tiene que estar en la planilla</td></tr>
+  </table></div>
+  <div class="note">Un caso resuelto completo tiene cuatro partes. Instrucción, respuesta, comprobación y conclusión.</div>
+</section>
+
+<section class="block" id="c1">
+  <div class="kicker">Caso 1 · 25 minutos</div>
+  <h2>La planilla del mes</h2>
+  <p>Suba S5-K01 y elija una pregunta. Escríbala con los siete elementos de la sesión 3.</p>
+  <ol class="ways"><li>¿Cómo cambió el consumo de energía por m3 de cada línea semana a semana, y qué línea está más lejos de la otra?</li><li>¿En qué semana fue peor la merma de secado de la línea 2 y cuánto costó esa semana la diferencia con la línea 1?</li><li>¿Cuánto representa el costo de la madera perdida en merma en cada línea, en todo el mes?</li></ol>
+  <div class="card armador">
+    <div class="head"><b>Mi instrucción</b><select data-k="c1q" aria-label="Pregunta elegida"><option value="">Elija la pregunta</option><option value="1">Pregunta 1</option><option value="2">Pregunta 2</option><option value="3">Pregunta 3</option></select></div>
+    <div id="elems"></div>
+    <button class="copy" data-armar="c1" data-label="Armar y copiar">Armar y copiar</button>
+  </div>
+  <div class="card">
+    <div class="field"><label>Cifra que comprobé</label><textarea data-k="c1cifra" style="min-height:60px"></textarea></div>
+    <div class="field"><label>Lo que dijo la herramienta</label><textarea data-k="c1dijo" style="min-height:60px"></textarea></div>
+    <div class="field"><label>Lo que dio mi comprobación</label><textarea data-k="c1comp" style="min-height:60px"></textarea></div>
+  </div>
+  <div class="card"><div class="field"><label>Conclusión para el gerente, en tres líneas</label><textarea data-k="c1concl" style="min-height:120px"></textarea></div></div>
+</section>
+
+<section class="block" id="c2">
+  <div class="kicker">Caso 2 · 17 minutos</div>
+  <h2>Lo que exige y lo que recomienda</h2>
+  <p>Copie el procedimiento S5-K02 y esta instrucción.</p>
+  <div class="prompt"><div class="lab">Instrucción</div><pre>Te pego el procedimiento de gestión de la energía de nuestra planta.
+Separa en dos tablas lo que el procedimiento exige y lo que solo recomienda. En cada fila pon la sección y la frase del texto que lo dice.
+Usa solo el procedimiento. No agregues requisitos que no estén escritos.
+Si una sección tiene una parte que exige y otra que recomienda, sepáralas en las dos tablas.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <p>Después, en la misma conversación.</p>
+  <div class="prompt"><div class="lab">Pregunta de control</div><pre>¿El procedimiento exige una auditoría externa anual o una certificación?</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <div class="card">
+    <div class="field"><label>¿Cuántas exigencias encontró la herramienta?</label><textarea data-k="c2n" style="min-height:44px"></textarea></div>
+    <div class="field"><label>¿Cuántas veces aparece la palabra debe en el texto?</label><textarea data-k="c2debe" style="min-height:44px"></textarea></div>
+    <div class="field"><label>¿Qué respondió sobre la auditoría externa?</label><textarea data-k="c2aud" style="min-height:60px"></textarea></div>
+  </div>
+  <div class="note"><b>Nota.</b> Use Ctrl F, o Cmd F en Mac, sobre esta página para contar la palabra debe en el bloque S5-K02.</div>
+</section>
+
+<section class="block" id="c3">
+  <div class="kicker">Caso 3 · 17 minutos</div>
+  <h2>El correo en inglés</h2>
+  <p>Copie el encargo S5-K03 y esta instrucción.</p>
+  <div class="prompt"><div class="lab">Instrucción</div><pre>Contexto. Soy jefe comercial de exportaciones de una planta chilena de tableros contrachapados. Te paso el encargo de un correo para un cliente del Reino Unido.
+Objetivo. Que el cliente acepte el embarque parcial y siga confiando en nosotros.
+Tarea. Redacta el correo en inglés.
+Criterios. Dice el atraso, ofrece el embarque parcial con sus dos fechas y deja claro que la fecha del 21 está por confirmar. Nombra el producto y los contenedores.
+Restricciones. No des detalles internos de la planta ni de fallas. No ofrezcas descuentos ni compensaciones.
+Formato. Correo formal en inglés británico, con asunto, de no más de diez líneas.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <p>Después, para comprobar.</p>
+  <div class="prompt"><div class="lab">Comprobación</div><pre>Ahora tradúcelo al español, frase por frase, para que yo compruebe qué dice. No lo mejores, tradúcelo tal cual.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <div class="card">
+    <div class="field"><label>Pegue aquí el correo</label><textarea data-k="c3mail" style="min-height:160px"></textarea></div>
+    <div class="field"><label>¿La traducción dice algo que usted no quería decir?</label><textarea data-k="c3trad" style="min-height:100px"></textarea></div>
+  </div>
+</section>
+
+<section class="block" id="c4">
+  <div class="kicker">Caso 4 · 12 minutos</div>
+  <h2>El reporte para la gerencia</h2>
+  <p>En la misma conversación del caso 1, copie las notas S5-K04 y esta instrucción.</p>
+  <div class="prompt"><div class="lab">Instrucción</div><pre>Con las cifras de la planilla de octubre que revisamos y estas notas, arma el reporte mensual de planta para la gerencia.
+Una página. Primero tres cifras clave con su comparación, después los hechos del mes y al final las decisiones pendientes.
+Usa solo cifras de la planilla. Si una cifra no está en la planilla, no la pongas.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <div class="card"><div class="field"><label>¿Alguna cifra del reporte no está en la planilla?</label><textarea data-k="c4cifra" style="min-height:60px"></textarea></div></div>
+</section>
+
+<section class="block" id="alertas">
+  <div class="kicker">Alertas</div>
+  <h2>Las alertas de planta</h2>
+  <div class="tablewrap"><table>
+    <tr><th style="width:50%">Lo que hace la IA</th><th>Lo que necesita otro sistema</th></tr>
+    <tr><td>Proponer el umbral</td><td>Tener los datos al día</td></tr>
+    <tr><td>Redactar la regla y el texto del aviso</td><td>Revisar la regla sola todos los días</td></tr>
+    <tr><td>Explicar el indicador</td><td>Enviar el aviso sin que nadie pregunte</td></tr>
+  </table></div>
+  <div class="note">El umbral lo decide una persona que conoce la planta. Para vigilar y avisar solo se necesita Power BI, un sistema de la planta o una automatización.</div>
+</section>
+
+<section class="block" id="tarea">
+  <div class="kicker">Para la sesión 6</div>
+  <h2>Antes de la próxima sesión</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Ordene sus dos tareas de la sesión 2 por impacto, frecuencia y riesgo del dato, y traiga elegida la que va a ser su caso aplicado.</p></div></div>
+  <div class="card">
+    <h3 style="margin-top:0">Guardar lo que anotó</h3>
+    <p class="small">Lo que escribió queda guardado en este navegador. Descárguelo para conservarlo.</p>
+    <div class="save">
+      <button class="btn2 primary" id="dl">Descargar mis respuestas</button>
+      <button class="btn2" id="pr">Imprimir o guardar en PDF</button>
+      <button class="btn2" id="clr">Borrar lo anotado</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  Curso de IA para Tulsa · Material del participante · Todo nombre, cifra y documento de los archivos y textos de práctica es ficticio.
+</div></footer>
+
+<script>
+(function () {
+  var KEY = 'lab-s5-tulsa';
+  var ELEM = ['Contexto', 'Objetivo', 'Tarea', 'Criterios', 'Restricciones', 'Ejemplos', 'Formato'];
+  var QS = ['¿Cómo cambió el consumo de energía por m3 de cada línea semana a semana, y qué línea está más lejos de la otra?', '¿En qué semana fue peor la merma de secado de la línea 2 y cuánto costó esa semana la diferencia con la línea 1?', '¿Cuánto representa el costo de la madera perdida en merma en cada línea, en todo el mes?'];
+
+  document.getElementById('elems').innerHTML = ELEM.map(function (e, i) {
+    return '<div class="field"><label>' + e + '</label><textarea data-k="c1e' + i + '"></textarea></div>';
+  }).join('');
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+
+  document.querySelectorAll('[data-k]').forEach(function (el) {
+    var k = el.getAttribute('data-k');
+    if (state[k] != null) el.value = state[k];
+    var save = function () {
+      state[k] = el.value;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    };
+    el.addEventListener('input', save);
+    el.addEventListener('change', save);
+  });
+
+  function v(k) { return (state[k] || '').trim(); }
+  function armar() {
+    var L = [];
+    ELEM.forEach(function (e, i) { var t = v('c1e' + i); if (t) L.push(e + '. ' + t); });
+    return L.join('\n');
+  }
+
+  function flash(b, msg, ok) {
+    var t = b.getAttribute('data-label');
+    b.textContent = msg; if (ok) b.classList.add('ok');
+    setTimeout(function () { b.textContent = t; b.classList.remove('ok'); }, 1600);
+  }
+  function copy(b, text) {
+    var done = function () { flash(b, 'Copiado', true); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+    } else { fallback(text); done(); }
+  }
+  function fallback(text) {
+    var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+    ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta);
+  }
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.getAttribute('data-armar')) {
+        copy(b, armar());
+      } else {
+        copy(b, b.parentNode.querySelector('pre').textContent);
+      }
+    });
+  });
+
+  document.getElementById('dl').addEventListener('click', function () {
+    var L = [];
+    L.push('Curso de IA para Tulsa. Sesión 5. Mis respuestas', '');
+    var q = v('c1q');
+    L.push('CASO 1. LA PLANILLA DEL MES');
+    L.push('Pregunta elegida. ' + (q ? q + '. ' + QS[q - 1] : ''));
+    ELEM.forEach(function (e, i) { L.push(e + '. ' + v('c1e' + i)); });
+    L.push('Cifra que comprobé. ' + v('c1cifra'));
+    L.push('Lo que dijo la herramienta. ' + v('c1dijo'));
+    L.push('Lo que dio mi comprobación. ' + v('c1comp'));
+    L.push('Conclusión para el gerente.', v('c1concl'), '');
+    L.push('CASO 2. LO QUE EXIGE Y LO QUE RECOMIENDA');
+    L.push('¿Cuántas exigencias encontró la herramienta? ' + v('c2n'));
+    L.push('¿Cuántas veces aparece la palabra debe en el texto? ' + v('c2debe'));
+    L.push('¿Qué respondió sobre la auditoría externa? ' + v('c2aud'), '');
+    L.push('CASO 3. EL CORREO EN INGLÉS');
+    L.push('El correo.', v('c3mail'));
+    L.push('¿La traducción dice algo que usted no quería decir? ' + v('c3trad'), '');
+    L.push('CASO 4. EL REPORTE PARA LA GERENCIA');
+    L.push('¿Alguna cifra del reporte no está en la planilla? ' + v('c4cifra'));
+    var blob = new Blob([L.join('\n')], { type: 'text/plain;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Sesion_05_Mis_respuestas.txt';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  });
+  document.getElementById('pr').addEventListener('click', function () { window.print(); });
+  var clr = document.getElementById('clr'), armed = false;
+  clr.addEventListener('click', function () {
+    if (!armed) { armed = true; clr.textContent = 'Confirmar borrado'; setTimeout(function () { armed = false; clr.textContent = 'Borrar lo anotado'; }, 4000); return; }
+    armed = false; clr.textContent = 'Borrar lo anotado';
+    state = {}; try { localStorage.removeItem(KEY); } catch (e) {}
+    document.querySelectorAll('[data-k]').forEach(function (el) { el.value = ''; });
+  });
+})();
+</script>
+</body>
+</html>
