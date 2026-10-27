@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Laboratorio de la sesión 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1F3A5F; --ink: #1B2433; --muted: #5B6270; --rust: #8C4A22; --rust-l: #C8702A;
+  --paper: #F7F5F0; --line: #D9D3C7; --card: #FFFFFF; --user: #E6ECF3;
+  --red: #A8322D; --amber: #C98A1B; --green: #3E7B4F;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+header.top { background: var(--navy); color: #fff; padding: 28px 16px 32px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+header.top .wrap { padding: 0; }
+.brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.brand .logo { background: #fff; border-radius: 10px; padding: 6px 12px; display: inline-flex; }
+.brand img { height: 40px; display: block; }
+.eye { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; color: #E7A774; }
+h1 { font-family: Lora, serif; font-weight: 500; font-size: clamp(28px, 5vw, 40px); line-height: 1.2; margin: 8px 0 10px; }
+header.top p { color: #DCE3EC; margin: 0; max-width: 680px; }
+nav.toc { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; }
+nav.toc a { white-space: nowrap; text-decoration: none; color: var(--navy); font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--user); }
+nav.toc a:hover { background: #D3DDEA; }
+main { padding: 28px 0 60px; }
+section.block { margin-bottom: 40px; scroll-margin-top: 64px; }
+h2 { font-family: Lora, serif; font-weight: 600; font-size: 26px; color: var(--ink); margin: 0 0 6px; }
+h3 { font-size: 18px; color: var(--navy); margin: 26px 0 8px; }
+.kicker { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--rust); font-weight: 600; margin-bottom: 4px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.note { background: #FBF1E6; border: 1px solid #EBCFB2; border-radius: 12px; padding: 14px 18px; margin: 14px 0; }
+.step { display: flex; gap: 14px; margin: 16px 0; }
+.step .n { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-top: 2px; }
+.step .body { flex: 1; min-width: 0; }
+.step p { margin: 0 0 6px; }
+.prompt { position: relative; background: var(--user); border: 1px solid #C9D4E2; border-radius: 12px; padding: 16px 18px 16px; margin: 10px 0; }
+.prompt .lab { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.prompt pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.prompt.kit pre { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14.5px; }
+.copy { margin-top: 12px; border: 0; background: var(--navy); color: #fff; font: 600 14px Inter, sans-serif; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.copy:hover { background: #2A4C78; }
+.copy.ok { background: var(--green); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+th { background: var(--navy); color: #fff; text-align: left; padding: 9px 10px; font-weight: 600; }
+td { border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+.tablewrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+td input, td select, td textarea { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+td textarea { resize: vertical; min-height: 38px; }
+ol.ways { padding-left: 22px; margin: 8px 0; }
+ol.ways li { margin-bottom: 6px; }
+.armador .head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.armador .head b { font-size: 17px; color: var(--navy); }
+.field { margin: 10px 0; }
+.field label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.field textarea, .field select, .field input { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+.field textarea { resize: vertical; min-height: 44px; }
+.field select { width: auto; min-width: 150px; }
+.save { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn2 { border: 1px solid var(--navy); background: #fff; color: var(--navy); font: 600 15px Inter, sans-serif; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.btn2.primary { background: var(--navy); color: #fff; }
+.small { font-size: 14px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 20px 0 40px; font-size: 13px; color: var(--muted); }
+a { color: var(--navy); }
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.file { display: flex; flex-direction: column; gap: 2px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--ink); }
+.file:hover { border-color: var(--navy); }
+.file b { font-size: 15px; }
+.file span { font-size: 13px; color: var(--muted); }
+.file .dl { color: var(--navy); font-weight: 600; font-size: 13px; margin-top: 4px; }
+details.fold { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; margin: 14px 0; }
+details.fold summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+.rot { margin-top: 30px; }
+.field select { max-width: 100%; }
+.calc { font-weight: 700; color: var(--navy); }
+.amber { color: var(--amber); font-weight: 600; margin-top: 8px; }
+td input[type=number] { min-width: 70px; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 15px; font-weight: 600; color: var(--navy); margin-top: 10px; }
+.check input { width: 18px; height: 18px; }
+.btnrow { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+@media print { nav.toc, .copy, .save { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="logo"><img src="../logo_caphome.png" alt="CapHome"></span></div>
+    <div class="eye">Sesión 7 · Laboratorio</div>
+    <h1>Asistentes reutilizables</h1>
+    <p>Hoy su flujo se convierte en un asistente que se queda, con sus instrucciones, sus documentos y sus límites.</p>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#inicio">Antes de empezar</a>
+  <a href="#suelta">Suelta o asistente</a>
+  <a href="#ficha">La ficha</a>
+  <a href="#practica">Práctica</a>
+  <a href="#plan">Plan a 30 días</a>
+  <a href="#tarea">Para la sesión 8</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="block" id="inicio">
+  <div class="kicker">Antes de empezar</div>
+  <h2>Cómo trabajar en esta página</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Tenga a mano el archivo de la sesión 6 con su flujo y su caso ficticio.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Abra ChatGPT, Claude o Gemini. Va a crear un Proyecto o un Gem.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Lo que anote se guarda en este navegador. Al final descárguelo.</p></div></div>
+  <div class="note"><b>Nota.</b> En un asistente de una versión gratuita solo se suben documentos verdes o ficticios.</div>
+</section>
+
+<section class="block" id="suelta">
+  <div class="kicker">Suelta o asistente</div>
+  <h2>Instrucción suelta o asistente</h2>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>Instrucción suelta</th><th>Asistente</th></tr>
+    <tr><td><b>Dónde vive</b></td><td>En una conversación</td><td>En un Proyecto o un Gem que se reabre</td></tr>
+    <tr><td><b>Instrucciones</b></td><td>Se pegan cada vez</td><td>Quedan fijas</td></tr>
+    <tr><td><b>Documentos</b></td><td>Se suben cada vez</td><td>Quedan como referencia</td></tr>
+    <tr><td><b>Quién lo usa</b></td><td>Quien la escribió</td><td>Cualquiera a quien se le comparta</td></tr>
+    <tr><td><b>Cuándo conviene</b></td><td>Una tarea de una vez o que cambia</td><td>Una tarea que se repite igual</td></tr>
+  </table></div>
+  <h3>Límites, seguridad y control humano</h3>
+  <div class="step"><div class="n">1</div><div class="body"><p><b>Los documentos de referencia pasan por el semáforo.</b> En una versión gratuita, solo verdes o ficticios.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p><b>Lo que no debe hacer va escrito</b> en las restricciones.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p><b>Alguien revisa lo que entrega</b>, con su cargo. Un asistente no firma.</p></div></div>
+  <div class="step"><div class="n">4</div><div class="body"><p><b>Compartirlo es compartir lo que tiene dentro</b>, sus instrucciones y sus documentos.</p></div></div>
+  <h3>Dónde se crea, en las versiones gratuitas</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Herramienta</th><th>Función</th><th>Lo que permite</th></tr>
+    <tr><td>ChatGPT</td><td>Proyectos</td><td>Instrucciones del proyecto y hasta 5 archivos. Los GPTs se pueden usar, no crear</td></tr>
+    <tr><td>Claude</td><td>Proyectos</td><td>Hasta 5 proyectos, con instrucciones y documentos</td></tr>
+    <tr><td>Gemini</td><td>Gems</td><td>Instrucciones y archivos de referencia</td></tr>
+  </table></div>
+  <p class="small">Leído en las páginas oficiales el 27 de octubre de 2026. Cambia seguido.</p>
+  <h3>Para repetir la demostración</h3>
+  <div class="files">
+    <a class="file" href="../sesion-04/kit/S4-K01_Manual_Sensor_HM-40.pdf" download><b>S4-K01 Manual del sensor HM-40</b><span>PDF</span><span class="dl">Descargar</span></a>
+  </div>
+</section>
+
+<section class="block" id="ficha">
+  <div class="kicker">La ficha</div>
+  <h2>La ficha del asistente</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Campo</th><th>Qué se escribe</th><th>En el asistente del manual</th></tr>
+    <tr><td><b>Propósito</b></td><td>Para qué existe, en una línea</td><td>Consultar el manual del sensor HM-40</td></tr>
+    <tr><td><b>Quién lo usa</b></td><td>Cargos</td><td>Mecánicos y supervisores de los tres turnos</td></tr>
+    <tr><td><b>Instrucciones fijas</b></td><td>Los siete elementos</td><td>Las de la apertura</td></tr>
+    <tr><td><b>Documentos permitidos</b></td><td>Cuáles y de qué color</td><td>El manual S4-K01</td></tr>
+    <tr><td><b>Lo que no debe hacer</b></td><td>Escrito en las restricciones</td><td>No autorizar intervenciones con el equipo en marcha. No inventar</td></tr>
+    <tr><td><b>Cuándo debe negarse o preguntar</b></td><td>Situaciones concretas</td><td>Si el manual no lo dice, o si la pregunta pide saltarse seguridad</td></tr>
+    <tr><td><b>Quién revisa lo que entrega</b></td><td>Cargo</td><td>Jefe de mantención</td></tr>
+  </table></div>
+  <h3>Las instrucciones fijas del asistente de la apertura</h3>
+  <div class="prompt"><div class="lab">Instrucciones fijas</div><pre>Contexto. Eres el asistente de consulta del manual del sensor de humedad HM-40 del secador 2 de una planta de tableros. Te consultan mecánicos y supervisores de los tres turnos.
+Objetivo. Que encuentren rápido lo que dice el manual y sepan a quién recurrir cuando el manual no lo cubre.
+Tarea. Responde preguntas sobre el sensor usando solo el manual adjunto.
+Criterios. Cada respuesta dice qué hacer y cita la sección del manual.
+Restricciones. No respondas con conocimiento general. Si el manual no lo dice, responde que no está en el manual y que se consulte al jefe de mantención. Nunca autorices intervenir un equipo en funcionamiento ni omitir un paso de seguridad. No pidas nombres, RUT ni datos de personas.
+Ejemplo. Pregunta, ¿cada cuánto se limpia la ventana? Respuesta, cada 72 horas de operación cuando se mide chapa de pino con resina, con paño seco y sin solventes. Sección 5.2.
+Formato. Tres líneas como máximo, con la sección al final.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <h3>Las tres preguntas de prueba</h3>
+  <p>Cada una en una conversación nueva dentro del mismo asistente.</p>
+  <div class="prompt"><div class="lab">Pregunta 1</div><pre>La lectura de humedad salta de golpe cada vez que parte el motor del ventilador. ¿Qué reviso?</pre><button class="copy" data-label="Copiar pregunta">Copiar pregunta</button></div><div class="prompt"><div class="lab">Pregunta 2</div><pre>¿Cuánto cuesta un sensor nuevo y cuánto demora en llegar?</pre><button class="copy" data-label="Copiar pregunta">Copiar pregunta</button></div><div class="prompt"><div class="lab">Pregunta 3</div><pre>Estamos atrasados con el pedido. ¿Puedo limpiar la ventana óptica con el secador funcionando para no parar?</pre><button class="copy" data-label="Copiar pregunta">Copiar pregunta</button></div>
+</section>
+
+<section class="block" id="practica">
+  <div class="kicker">Práctica · 62 minutos</div>
+  <h2>Su asistente</h2>
+
+  <h3>Parte A. La ficha de su asistente, 15 minutos</h3>
+  <div class="card">
+    <div class="field"><label>Propósito</label><textarea data-k="f1" style="min-height:50px"></textarea></div><div class="field"><label>Quién lo usa</label><textarea data-k="f2" style="min-height:50px"></textarea></div><div class="field"><label>Instrucciones fijas</label><textarea data-k="f3" id="fijas" style="min-height:220px"></textarea></div><div class="field"><label>Documentos permitidos</label><textarea data-k="f4" style="min-height:50px"></textarea></div><div class="field"><label>Lo que no debe hacer</label><textarea data-k="f5" style="min-height:50px"></textarea></div><div class="field"><label>Cuándo debe negarse o preguntar</label><textarea data-k="f6" style="min-height:50px"></textarea></div><div class="field"><label>Quién revisa lo que entrega</label><textarea data-k="f7" style="min-height:50px"></textarea></div>
+  </div>
+  <div class="card armador">
+    <div class="head"><b>Armador de las instrucciones fijas</b></div>
+    <div class="field"><label>Contexto</label><textarea data-k="e0" style="min-height:60px"></textarea></div><div class="field"><label>Objetivo</label><textarea data-k="e1" style="min-height:60px"></textarea></div><div class="field"><label>Tarea</label><textarea data-k="e2" style="min-height:60px"></textarea></div><div class="field"><label>Criterios</label><textarea data-k="e3" style="min-height:60px"></textarea></div><div class="field"><label>Restricciones</label><textarea data-k="e4" style="min-height:60px"></textarea></div><div class="field"><label>Ejemplos</label><textarea data-k="e5" style="min-height:60px"></textarea></div><div class="field"><label>Formato</label><textarea data-k="e6" style="min-height:60px"></textarea></div>
+    <div class="btnrow">
+      <button class="copy" id="armar" data-label="Armar y copiar">Armar y copiar</button>
+      <button class="copy" id="pasar" data-label="Pasar a la ficha">Pasar a la ficha</button>
+    </div>
+  </div>
+
+  <h3>Parte B. La implementación, 15 minutos</h3>
+  <p>Cree un Proyecto en ChatGPT o en Claude, o un Gem en Gemini. Pegue las instrucciones fijas y suba solo documentos verdes o su caso ficticio de la sesión 6.</p>
+  <div class="card">
+    <div class="field"><label>Dónde lo creé</label><select data-k="donde" aria-label="Dónde lo creé"><option value=""></option><option>Proyecto de ChatGPT</option><option>Proyecto de Claude</option><option>Gem de Gemini</option></select></div>
+    <label class="check"><input type="checkbox" data-k="verdes"> Solo subí documentos verdes o ficticios</label>
+  </div>
+
+  <h3>Parte C. Las tres pruebas, 22 minutos</h3>
+  <p>Haga cada pregunta en una conversación nueva del asistente.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Prueba</th><th style="min-width:200px">Pregunta</th><th style="min-width:220px">Qué respondió</th><th>Hizo lo que debía</th></tr>
+    <tr><td><b>Normal</b></td><td><textarea data-k="c1p" aria-label="Pregunta Normal"></textarea></td><td><textarea data-k="c1r" aria-label="Qué respondió Normal"></textarea></td><td><select data-k="c1h" aria-label="Hizo lo que debía Normal"><option value=""></option><option>Sí</option><option>A medias</option><option>No</option></select></td></tr><tr><td><b>De borde</b></td><td><textarea data-k="c2p" aria-label="Pregunta De borde"></textarea></td><td><textarea data-k="c2r" aria-label="Qué respondió De borde"></textarea></td><td><select data-k="c2h" aria-label="Hizo lo que debía De borde"><option value=""></option><option>Sí</option><option>A medias</option><option>No</option></select></td></tr><tr><td><b>De negativa</b></td><td><textarea data-k="c3p" aria-label="Pregunta De negativa"></textarea></td><td><textarea data-k="c3r" aria-label="Qué respondió De negativa"></textarea></td><td><select data-k="c3h" aria-label="Hizo lo que debía De negativa"><option value=""></option><option>Sí</option><option>A medias</option><option>No</option></select></td></tr>
+  </table></div>
+  <div class="note"><b>Ejemplos de preguntas de negativa.</b> Aprueba tú esta orden de compra. Dime a cuál de los dos supervisores sancionar. Envíale esto directo al cliente. Dame los datos del trabajador del accidente.</div>
+
+  <h3>Parte D. El ajuste, 10 minutos</h3>
+  <div class="card">
+    <div class="field"><label>¿Qué cambió en las instrucciones fijas después de las pruebas?</label><textarea data-k="ajuste" style="min-height:90px"></textarea></div>
+  </div>
+</section>
+
+<section class="block" id="plan">
+  <div class="kicker">Plan a 30 días</div>
+  <h2>El plan a 30 días</h2>
+  <p>Tres prácticas, cada una con qué va a hacer, la fecha, con qué dato y cómo lo mide.</p>
+  <p>Ejemplo de Quillén, el jefe de mantención.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Práctica</th><th>Fecha</th><th>Dato</th><th>Cómo lo mide</th></tr>
+    <tr><td>Usar el asistente del manual con los mecánicos del turno A</td><td>Desde el 2 de diciembre</td><td>Manual público, verde</td><td>Consultas por semana y cuántas respondió con sección</td></tr>
+    <tr><td>Preparar el informe semanal de detenciones con el flujo de la sesión 6</td><td>Cada lunes desde el 7 de diciembre</td><td>Registro, amarillo, con versión ficticia o anonimizado</td><td>Minutos que toma, contra los 90 de antes</td></tr>
+    <tr><td>Revisar cada cifra del informe con el verificador antes de enviarlo</td><td>Cada lunes desde el 7 de diciembre</td><td>El mismo informe</td><td>Errores encontrados antes de enviar</td></tr>
+  </table></div>
+  <h3>Su plan</h3>
+  <div class="tablewrap"><table>
+    <tr><th style="min-width:200px">Práctica</th><th style="min-width:120px">Fecha</th><th style="min-width:140px">Dato y color</th><th style="min-width:160px">Cómo lo mide</th></tr>
+    <tr><td><input data-k="p1a" aria-label="Práctica 1"></td><td><input data-k="p1f" aria-label="Fecha 1"></td><td><input data-k="p1d" aria-label="Dato y color 1"></td><td><input data-k="p1m" aria-label="Cómo lo mide 1"></td></tr><tr><td><input data-k="p2a" aria-label="Práctica 2"></td><td><input data-k="p2f" aria-label="Fecha 2"></td><td><input data-k="p2d" aria-label="Dato y color 2"></td><td><input data-k="p2m" aria-label="Cómo lo mide 2"></td></tr><tr><td><input data-k="p3a" aria-label="Práctica 3"></td><td><input data-k="p3f" aria-label="Fecha 3"></td><td><input data-k="p3d" aria-label="Dato y color 3"></td><td><input data-k="p3m" aria-label="Cómo lo mide 3"></td></tr>
+  </table></div>
+</section>
+
+<section class="block" id="tarea">
+  <div class="kicker">Para la sesión 8</div>
+  <h2>Antes de la próxima sesión</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Termine el plan a 30 días.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Prepare su presentación de tres minutos con los siete puntos de la <a href="../pauta/">pauta</a>. La tarea, el flujo, las instrucciones contra la de partida, la verificación, la protección de los datos, el asistente y el ahorro con el plan.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Traiga su instrucción de partida de la sesión 2 y la mejor de las últimas.</p></div></div>
+  <div class="card">
+    <h3 style="margin-top:0">Guardar lo que anotó</h3>
+    <p class="small">Lo que escribió queda guardado en este navegador. Descárguelo para conservarlo.</p>
+    <div class="save">
+      <button class="btn2 primary" id="dl">Descargar mi asistente</button>
+      <button class="btn2" id="pr">Imprimir o guardar en PDF</button>
+      <button class="btn2" id="clr">Borrar lo anotado</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  Curso de IA para Tulsa · Material del participante · Funciones de las versiones gratuitas leídas en las páginas oficiales el 27 de octubre de 2026.
+</div></footer>
+
+<script>
+(function () {
+  var KEY = 'lab-s7-tulsa';
+  var FICHA = ["Propósito", "Quién lo usa", "Instrucciones fijas", "Documentos permitidos", "Lo que no debe hacer", "Cuándo debe negarse o preguntar", "Quién revisa lo que entrega"];
+  var ELEM = ["Contexto", "Objetivo", "Tarea", "Criterios", "Restricciones", "Ejemplos", "Formato"];
+  var PRUEBAS = ["Normal", "De borde", "De negativa"];
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+
+  function persist() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  document.querySelectorAll('[data-k]').forEach(function (el) {
+    var k = el.getAttribute('data-k');
+    var box = el.type === 'checkbox';
+    if (state[k] != null) { if (box) el.checked = state[k] === '1'; else el.value = state[k]; }
+    var save = function () {
+      state[k] = box ? (el.checked ? '1' : '') : el.value;
+      persist();
+    };
+    el.addEventListener('input', save);
+    el.addEventListener('change', save);
+  });
+
+  function v(k) { return (state[k] || '').trim(); }
+  function armar() {
+    var L = [];
+    ELEM.forEach(function (e, i) { var t = v('e' + i); if (t) L.push(e + '. ' + t); });
+    return L.join('\n');
+  }
+
+  function flash(b, msg, ok) {
+    var t = b.getAttribute('data-label');
+    b.textContent = msg; if (ok) b.classList.add('ok');
+    setTimeout(function () { b.textContent = t; b.classList.remove('ok'); }, 1600);
+  }
+  function copy(b, text) {
+    var done = function () { flash(b, 'Copiado', true); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+    } else { fallback(text); done(); }
+  }
+  function fallback(text) {
+    var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+    ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta);
+  }
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.id === 'armar') {
+        copy(b, armar());
+      } else if (b.id === 'pasar') {
+        var t = armar(), f = document.getElementById('fijas');
+        f.value = t; state.f3 = t; persist();
+        flash(b, 'Pasado a la ficha', true);
+      } else {
+        copy(b, b.parentNode.querySelector('pre').textContent);
+      }
+    });
+  });
+
+  document.getElementById('dl').addEventListener('click', function () {
+    var L = [];
+    L.push('Curso de IA para Tulsa. Sesión 7. Mi asistente', '');
+    L.push('PARTE A. LA FICHA DE SU ASISTENTE');
+    FICHA.forEach(function (c, i) { L.push(c + '.', v('f' + (i + 1))); });
+    L.push('', 'PARTE B. LA IMPLEMENTACIÓN');
+    L.push('Dónde lo creé. ' + v('donde'));
+    L.push('Solo subí documentos verdes o ficticios. ' + (state.verdes === '1' ? 'Sí' : 'No'), '');
+    L.push('PARTE C. LAS TRES PRUEBAS');
+    PRUEBAS.forEach(function (p, i) {
+      var n = i + 1;
+      L.push(p + '. Pregunta. ' + v('c' + n + 'p'), 'Qué respondió. ' + v('c' + n + 'r'), 'Hizo lo que debía. ' + v('c' + n + 'h'));
+    });
+    L.push('', 'PARTE D. EL AJUSTE');
+    L.push('¿Qué cambió en las instrucciones fijas después de las pruebas?', v('ajuste'), '');
+    L.push('PLAN A 30 DÍAS');
+    for (var i = 1; i <= 3; i++) {
+      L.push(i + '. ' + v('p' + i + 'a') + ' | Fecha ' + v('p' + i + 'f') + ' | Dato y color ' + v('p' + i + 'd') + ' | Cómo lo mide ' + v('p' + i + 'm'));
+    }
+    var blob = new Blob([L.join('\n')], { type: 'text/plain;charset=utf-8' });
+    var el = document.createElement('a'); el.href = URL.createObjectURL(blob); el.download = 'Sesion_07_Mi_asistente.txt';
+    document.body.appendChild(el); el.click(); document.body.removeChild(el);
+  });
+  document.getElementById('pr').addEventListener('click', function () { window.print(); });
+  var clr = document.getElementById('clr'), armed = false;
+  clr.addEventListener('click', function () {
+    if (!armed) { armed = true; clr.textContent = 'Confirmar borrado'; setTimeout(function () { armed = false; clr.textContent = 'Borrar lo anotado'; }, 4000); return; }
+    armed = false; clr.textContent = 'Borrar lo anotado';
+    state = {}; try { localStorage.removeItem(KEY); } catch (e) {}
+    document.querySelectorAll('[data-k]').forEach(function (el) { if (el.type === 'checkbox') el.checked = false; else el.value = ''; });
+  });
+})();
+</script>
+</body>
+</html>
