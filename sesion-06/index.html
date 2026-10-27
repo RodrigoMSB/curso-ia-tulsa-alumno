@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Laboratorio de la sesión 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1F3A5F; --ink: #1B2433; --muted: #5B6270; --rust: #8C4A22; --rust-l: #C8702A;
+  --paper: #F7F5F0; --line: #D9D3C7; --card: #FFFFFF; --user: #E6ECF3;
+  --red: #A8322D; --amber: #C98A1B; --green: #3E7B4F;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+header.top { background: var(--navy); color: #fff; padding: 28px 16px 32px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+header.top .wrap { padding: 0; }
+.brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.brand .logo { background: #fff; border-radius: 10px; padding: 6px 12px; display: inline-flex; }
+.brand img { height: 40px; display: block; }
+.eye { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; color: #E7A774; }
+h1 { font-family: Lora, serif; font-weight: 500; font-size: clamp(28px, 5vw, 40px); line-height: 1.2; margin: 8px 0 10px; }
+header.top p { color: #DCE3EC; margin: 0; max-width: 680px; }
+nav.toc { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; }
+nav.toc a { white-space: nowrap; text-decoration: none; color: var(--navy); font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--user); }
+nav.toc a:hover { background: #D3DDEA; }
+main { padding: 28px 0 60px; }
+section.block { margin-bottom: 40px; scroll-margin-top: 64px; }
+h2 { font-family: Lora, serif; font-weight: 600; font-size: 26px; color: var(--ink); margin: 0 0 6px; }
+h3 { font-size: 18px; color: var(--navy); margin: 26px 0 8px; }
+.kicker { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--rust); font-weight: 600; margin-bottom: 4px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.note { background: #FBF1E6; border: 1px solid #EBCFB2; border-radius: 12px; padding: 14px 18px; margin: 14px 0; }
+.step { display: flex; gap: 14px; margin: 16px 0; }
+.step .n { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-top: 2px; }
+.step .body { flex: 1; min-width: 0; }
+.step p { margin: 0 0 6px; }
+.prompt { position: relative; background: var(--user); border: 1px solid #C9D4E2; border-radius: 12px; padding: 16px 18px 16px; margin: 10px 0; }
+.prompt .lab { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.prompt pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.prompt.kit pre { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14.5px; }
+.copy { margin-top: 12px; border: 0; background: var(--navy); color: #fff; font: 600 14px Inter, sans-serif; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.copy:hover { background: #2A4C78; }
+.copy.ok { background: var(--green); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+th { background: var(--navy); color: #fff; text-align: left; padding: 9px 10px; font-weight: 600; }
+td { border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+.tablewrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+td input, td select, td textarea { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+td textarea { resize: vertical; min-height: 38px; }
+ol.ways { padding-left: 22px; margin: 8px 0; }
+ol.ways li { margin-bottom: 6px; }
+.armador .head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.armador .head b { font-size: 17px; color: var(--navy); }
+.field { margin: 10px 0; }
+.field label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.field textarea, .field select, .field input { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+.field textarea { resize: vertical; min-height: 44px; }
+.field select { width: auto; min-width: 150px; }
+.save { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn2 { border: 1px solid var(--navy); background: #fff; color: var(--navy); font: 600 15px Inter, sans-serif; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.btn2.primary { background: var(--navy); color: #fff; }
+.small { font-size: 14px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 20px 0 40px; font-size: 13px; color: var(--muted); }
+a { color: var(--navy); }
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.file { display: flex; flex-direction: column; gap: 2px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--ink); }
+.file:hover { border-color: var(--navy); }
+.file b { font-size: 15px; }
+.file span { font-size: 13px; color: var(--muted); }
+.file .dl { color: var(--navy); font-weight: 600; font-size: 13px; margin-top: 4px; }
+details.fold { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; margin: 14px 0; }
+details.fold summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+.rot { margin-top: 30px; }
+.field select { max-width: 100%; }
+.calc { font-weight: 700; color: var(--navy); }
+.amber { color: var(--amber); font-weight: 600; margin-top: 8px; }
+td input[type=number] { min-width: 70px; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 15px; font-weight: 600; color: var(--navy); margin-top: 10px; }
+.check input { width: 18px; height: 18px; }
+@media print { nav.toc, .copy, .save { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="logo"><img src="../logo_caphome.png" alt="CapHome"></span></div>
+    <div class="eye">Sesión 6 · Laboratorio</div>
+    <h1>Casos de su área</h1>
+    <p>Hoy se trabaja con su propio caso. Ningún dato real se entrega a una versión gratuita. El caso se prueba con una versión ficticia equivalente.</p>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#inicio">Antes de empezar</a>
+  <a href="#elegir">Elegir el caso</a>
+  <a href="#p1">Práctica 1</a>
+  <a href="#flujo">El flujo</a>
+  <a href="#p2">Práctica 2</a>
+  <a href="#tarea">Para la sesión 7</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="block" id="inicio">
+  <div class="kicker">Antes de empezar</div>
+  <h2>Cómo trabajar en esta página</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Tenga a mano sus dos tareas de la sesión 2, su semáforo de la sesión 1 y su biblioteca de la sesión 4.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Abra la herramienta que prefiera.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Lo que anote se guarda en este navegador. Al final descárguelo. Es el borrador de su caso aplicado.</p></div></div>
+  <div class="note"><b>Nota.</b> No suba ningún documento real, ni para que la herramienta lo anonimice. Describa su forma y use el generador.</div>
+</section>
+
+<section class="block" id="elegir">
+  <div class="kicker">Elegir el caso</div>
+  <h2>Cómo se elige el caso</h2>
+  <div class="tablewrap"><table>
+    <tr><th style="width:46%">Pregunta</th><th>1</th><th>2</th><th>3</th></tr>
+    <tr><td><b>Impacto.</b> ¿Cuánto mejora el trabajo si sale mejor o más rápido?</td><td>Poco</td><td>Algo</td><td>Mucho</td></tr>
+    <tr><td><b>Frecuencia.</b> ¿Cuántas veces al mes se hace?</td><td>Una o menos</td><td>Dos a cuatro</td><td>Cinco o más</td></tr>
+    <tr><td><b>Facilidad del dato.</b> ¿Qué color tiene lo que usa?</td><td>Rojo</td><td>Amarillo</td><td>Verde</td></tr>
+  </table></div>
+  <p>Se suman los tres. Gana la tarea con más puntos. Si empatan, gana la que tiene más minutos al mes. Un dato rojo no deja la tarea fuera, obliga a trabajarla con un caso ficticio.</p>
+</section>
+
+<section class="block" id="p1">
+  <div class="kicker">Práctica 1 · 15 minutos</div>
+  <h2>Priorizar sus dos tareas</h2>
+  <div class="tablewrap"><table>
+    <tr><th>#</th><th style="min-width:180px">Tarea</th><th>Veces al mes</th><th>Minutos cada vez</th><th>Impacto</th><th>Frecuencia</th><th>Dato</th><th>Total</th></tr>
+    <tr><td>1</td><td><input data-k="t1" aria-label="Tarea 1"></td><td><input type="number" min="0" data-k="t1v" aria-label="Veces al mes 1"></td><td><input type="number" min="0" data-k="t1m" aria-label="Minutos cada vez 1"></td><td><select data-k="t1i" aria-label="Impacto 1"><option value=""></option><option>1</option><option>2</option><option>3</option></select></td><td><select data-k="t1f" aria-label="Frecuencia 1"><option value=""></option><option>1</option><option>2</option><option>3</option></select></td><td><select data-k="t1d" aria-label="Dato 1"><option value=""></option><option>1</option><option>2</option><option>3</option></select></td><td class="calc" id="tot1"></td></tr><tr><td>2</td><td><input data-k="t2" aria-label="Tarea 2"></td><td><input type="number" min="0" data-k="t2v" aria-label="Veces al mes 2"></td><td><input type="number" min="0" data-k="t2m" aria-label="Minutos cada vez 2"></td><td><select data-k="t2i" aria-label="Impacto 2"><option value=""></option><option>1</option><option>2</option><option>3</option></select></td><td><select data-k="t2f" aria-label="Frecuencia 2"><option value=""></option><option>1</option><option>2</option><option>3</option></select></td><td><select data-k="t2d" aria-label="Dato 2"><option value=""></option><option>1</option><option>2</option><option>3</option></select></td><td class="calc" id="tot2"></td></tr>
+  </table></div>
+  <p style="margin-top:10px">Minutos al mes. Tarea 1, <span class="calc" id="mm1">—</span>. Tarea 2, <span class="calc" id="mm2">—</span>.</p>
+  <div class="card">
+    <div class="field"><label>Elijo la tarea</label><select data-k="elijo" aria-label="Elijo la tarea"><option value=""></option><option>1</option><option>2</option></select></div>
+    <div class="field"><label>Por qué</label><textarea data-k="porque" style="min-height:60px"></textarea></div>
+  </div>
+</section>
+
+<section class="block" id="flujo">
+  <div class="kicker">El flujo</div>
+  <h2>Cómo se diseña el flujo</h2>
+  <p>Un flujo de trabajo con IA tiene cuatro partes. Entrada, pasos, revisión y producto. En cada paso se dice quién lo hace y con qué dato.</p>
+  <p>Ejemplo de Quillén. El informe semanal de detenciones.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Paso</th><th>Qué se hace</th><th>Quién</th><th>Dato y color</th><th>Instrucción</th></tr>
+    <tr><td>1. Entrada</td><td>Descargar el registro de la semana</td><td>Persona</td><td>Registro, amarillo</td><td>No aplica</td></tr>
+    <tr><td>2</td><td>Pasar a versión ficticia o anonimizar</td><td>Persona</td><td>Queda verde o ficticio</td><td>Generador o anonimización</td></tr>
+    <tr><td>3</td><td>Unificar nombres y sumar por equipo</td><td>IA</td><td>Ficticio</td><td>Instrucción del Pareto</td></tr>
+    <tr><td>4</td><td>Revisar el Pareto contra el registro</td><td>Persona</td><td>Ficticio</td><td>Filtro de Excel</td></tr>
+    <tr><td>5</td><td>Redactar el informe</td><td>IA</td><td>Ficticio</td><td>Instrucción de informe</td></tr>
+    <tr><td>6</td><td>Revisión final y envío</td><td>Persona decide</td><td>Real</td><td>Verificador</td></tr>
+  </table></div>
+</section>
+
+<section class="block" id="p2">
+  <div class="kicker">Práctica 2 · 55 minutos</div>
+  <h2>Su flujo, probado</h2>
+
+  <h3>Parte A. El flujo de su caso, 10 minutos</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Paso</th><th style="min-width:180px">Qué se hace</th><th>Quién</th><th style="min-width:120px">Dato</th><th>Color</th><th style="min-width:160px">Instrucción</th></tr>
+    <tr><td>1</td><td><input data-k="a1q" aria-label="Qué se hace 1"></td><td><select data-k="a1w" aria-label="Quién 1"><option value=""></option><option>IA</option><option>Persona</option><option>Persona decide</option><option>Sistema</option></select></td><td><input data-k="a1d" aria-label="Dato 1"></td><td><select data-k="a1c" aria-label="Color 1"><option value=""></option><option>Verde</option><option>Amarillo</option><option>Rojo</option><option>Ficticio</option></select></td><td><input data-k="a1i" aria-label="Instrucción 1"></td></tr><tr><td>2</td><td><input data-k="a2q" aria-label="Qué se hace 2"></td><td><select data-k="a2w" aria-label="Quién 2"><option value=""></option><option>IA</option><option>Persona</option><option>Persona decide</option><option>Sistema</option></select></td><td><input data-k="a2d" aria-label="Dato 2"></td><td><select data-k="a2c" aria-label="Color 2"><option value=""></option><option>Verde</option><option>Amarillo</option><option>Rojo</option><option>Ficticio</option></select></td><td><input data-k="a2i" aria-label="Instrucción 2"></td></tr><tr><td>3</td><td><input data-k="a3q" aria-label="Qué se hace 3"></td><td><select data-k="a3w" aria-label="Quién 3"><option value=""></option><option>IA</option><option>Persona</option><option>Persona decide</option><option>Sistema</option></select></td><td><input data-k="a3d" aria-label="Dato 3"></td><td><select data-k="a3c" aria-label="Color 3"><option value=""></option><option>Verde</option><option>Amarillo</option><option>Rojo</option><option>Ficticio</option></select></td><td><input data-k="a3i" aria-label="Instrucción 3"></td></tr><tr><td>4</td><td><input data-k="a4q" aria-label="Qué se hace 4"></td><td><select data-k="a4w" aria-label="Quién 4"><option value=""></option><option>IA</option><option>Persona</option><option>Persona decide</option><option>Sistema</option></select></td><td><input data-k="a4d" aria-label="Dato 4"></td><td><select data-k="a4c" aria-label="Color 4"><option value=""></option><option>Verde</option><option>Amarillo</option><option>Rojo</option><option>Ficticio</option></select></td><td><input data-k="a4i" aria-label="Instrucción 4"></td></tr><tr><td>5</td><td><input data-k="a5q" aria-label="Qué se hace 5"></td><td><select data-k="a5w" aria-label="Quién 5"><option value=""></option><option>IA</option><option>Persona</option><option>Persona decide</option><option>Sistema</option></select></td><td><input data-k="a5d" aria-label="Dato 5"></td><td><select data-k="a5c" aria-label="Color 5"><option value=""></option><option>Verde</option><option>Amarillo</option><option>Rojo</option><option>Ficticio</option></select></td><td><input data-k="a5i" aria-label="Instrucción 5"></td></tr><tr><td>6</td><td><input data-k="a6q" aria-label="Qué se hace 6"></td><td><select data-k="a6w" aria-label="Quién 6"><option value=""></option><option>IA</option><option>Persona</option><option>Persona decide</option><option>Sistema</option></select></td><td><input data-k="a6d" aria-label="Dato 6"></td><td><select data-k="a6c" aria-label="Color 6"><option value=""></option><option>Verde</option><option>Amarillo</option><option>Rojo</option><option>Ficticio</option></select></td><td><input data-k="a6i" aria-label="Instrucción 6"></td></tr><tr><td>7</td><td><input data-k="a7q" aria-label="Qué se hace 7"></td><td><select data-k="a7w" aria-label="Quién 7"><option value=""></option><option>IA</option><option>Persona</option><option>Persona decide</option><option>Sistema</option></select></td><td><input data-k="a7d" aria-label="Dato 7"></td><td><select data-k="a7c" aria-label="Color 7"><option value=""></option><option>Verde</option><option>Amarillo</option><option>Rojo</option><option>Ficticio</option></select></td><td><input data-k="a7i" aria-label="Instrucción 7"></td></tr><tr><td>8</td><td><input data-k="a8q" aria-label="Qué se hace 8"></td><td><select data-k="a8w" aria-label="Quién 8"><option value=""></option><option>IA</option><option>Persona</option><option>Persona decide</option><option>Sistema</option></select></td><td><input data-k="a8d" aria-label="Dato 8"></td><td><select data-k="a8c" aria-label="Color 8"><option value=""></option><option>Verde</option><option>Amarillo</option><option>Rojo</option><option>Ficticio</option></select></td><td><input data-k="a8i" aria-label="Instrucción 8"></td></tr>
+  </table></div>
+
+  <h3>Parte B. El caso ficticio equivalente, 10 minutos</h3>
+  <p>Copie el generador y, al final, describa el documento real de su caso solo por su forma, nunca por su contenido.</p>
+  <div class="prompt"><div class="lab">Generador</div><pre id="gen">Necesito un ejemplo ficticio para probar una tarea de mi trabajo sin usar datos reales.
+Te describo cómo es el documento real, sin darte su contenido.
+Genera un documento ficticio equivalente, con la misma estructura y el mismo tipo de datos, con valores verosímiles para una planta de tableros contrachapados.
+Usa nombres de personas y de empresas claramente inventados. No uses RUT. Si hay montos, usa valores redondos que se noten ficticios.
+Incluye dos o tres casos difíciles de los que aparecen en la realidad, como un dato faltante o un valor fuera de lo normal, y dime cuáles son.
+Si es una planilla, entrégala como tabla que se pueda copiar a Excel. Si es un documento, entrega el texto completo.
+El documento real es el siguiente.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <div class="card">
+    <div class="field"><label>Descripción del documento real, solo su forma</label><textarea data-k="desc" style="min-height:90px"></textarea></div>
+    <button class="copy" id="copygen" data-label="Copiar generador con mi descripción">Copiar generador con mi descripción</button>
+  </div>
+  <div class="card">
+    <div class="field"><label>Pegue aquí el caso ficticio</label><textarea data-k="ficticio" style="min-height:200px"></textarea></div>
+    <label class="check"><input type="checkbox" data-k="revise"> Revisé que no tiene nada real</label>
+  </div>
+  <p class="small">Antes de usarlo, revise que no tenga nada real, ni un nombre, ni una cifra, ni un cliente.</p>
+
+  <h3>Parte C. La prueba de principio a fin, 25 minutos</h3>
+  <p>Recorra el flujo con el caso ficticio, con las instrucciones de su biblioteca.</p>
+  <div class="tablewrap"><table>
+    <tr><th style="min-width:140px">Paso</th><th>¿Funcionó?</th><th style="min-width:220px">Qué corregí, en la instrucción o en el flujo</th></tr>
+    <tr><td><input data-k="c1p" aria-label="Paso 1"></td><td><select data-k="c1f" aria-label="Funcionó 1"><option value=""></option><option>Sí</option><option>A medias</option><option>No</option></select></td><td><input data-k="c1q" aria-label="Qué corregí 1"></td></tr><tr><td><input data-k="c2p" aria-label="Paso 2"></td><td><select data-k="c2f" aria-label="Funcionó 2"><option value=""></option><option>Sí</option><option>A medias</option><option>No</option></select></td><td><input data-k="c2q" aria-label="Qué corregí 2"></td></tr><tr><td><input data-k="c3p" aria-label="Paso 3"></td><td><select data-k="c3f" aria-label="Funcionó 3"><option value=""></option><option>Sí</option><option>A medias</option><option>No</option></select></td><td><input data-k="c3q" aria-label="Qué corregí 3"></td></tr><tr><td><input data-k="c4p" aria-label="Paso 4"></td><td><select data-k="c4f" aria-label="Funcionó 4"><option value=""></option><option>Sí</option><option>A medias</option><option>No</option></select></td><td><input data-k="c4q" aria-label="Qué corregí 4"></td></tr><tr><td><input data-k="c5p" aria-label="Paso 5"></td><td><select data-k="c5f" aria-label="Funcionó 5"><option value=""></option><option>Sí</option><option>A medias</option><option>No</option></select></td><td><input data-k="c5q" aria-label="Qué corregí 5"></td></tr><tr><td><input data-k="c6p" aria-label="Paso 6"></td><td><select data-k="c6f" aria-label="Funcionó 6"><option value=""></option><option>Sí</option><option>A medias</option><option>No</option></select></td><td><input data-k="c6q" aria-label="Qué corregí 6"></td></tr>
+  </table></div>
+
+  <h3>Parte D. El ahorro, 10 minutos</h3>
+  <div class="card">
+    <div class="field"><label>Minutos que toma hoy</label><input type="number" min="0" data-k="dhoy"></div>
+    <div class="field"><label>Minutos con el flujo, contando la revisión</label><input type="number" min="0" data-k="dflujo"></div>
+    <div class="field"><label>Veces al mes</label><input type="number" min="0" data-k="dveces"></div>
+    <p style="margin-top:12px">Ahorro al mes, en minutos. <span class="calc" id="ahm">—</span></p>
+    <p>Ahorro al mes, en horas. <span class="calc" id="ahh">—</span></p>
+    <p class="amber" id="ambar" hidden>¿Contó el tiempo de revisión?</p>
+  </div>
+  <p class="small">Ahorro al mes es minutos de hoy menos minutos con el flujo, por las veces al mes.</p>
+</section>
+
+<section class="block" id="tarea">
+  <div class="kicker">Para la sesión 7</div>
+  <h2>Antes de la próxima sesión</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Termine la prueba del flujo si quedó algo pendiente y llegue con el archivo descargado. En la sesión 7 el flujo se convierte en un asistente.</p></div></div>
+  <div class="note">En la pauta, lo de hoy cubre el criterio 1, el caso, el 2, el flujo, el 5, la protección de los datos, y el 7, el ahorro.</div>
+  <div class="card">
+    <h3 style="margin-top:0">Guardar lo que anotó</h3>
+    <p class="small">Lo que escribió queda guardado en este navegador. Descárguelo para conservarlo.</p>
+    <div class="save">
+      <button class="btn2 primary" id="dl">Descargar mi caso</button>
+      <button class="btn2" id="pr">Imprimir o guardar en PDF</button>
+      <button class="btn2" id="clr">Borrar lo anotado</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  Curso de IA para Tulsa · Material del participante · Ningún dato real se ingresa en esta página.
+</div></footer>
+
+<script>
+(function () {
+  var KEY = 'lab-s6-tulsa';
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+
+  document.querySelectorAll('[data-k]').forEach(function (el) {
+    var k = el.getAttribute('data-k');
+    var box = el.type === 'checkbox';
+    if (state[k] != null) { if (box) el.checked = state[k] === '1'; else el.value = state[k]; }
+    var save = function () {
+      state[k] = box ? (el.checked ? '1' : '') : el.value;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      calc();
+    };
+    el.addEventListener('input', save);
+    el.addEventListener('change', save);
+  });
+
+  function v(k) { return (state[k] || '').trim(); }
+  function n(k) { var x = parseFloat(v(k).replace(',', '.')); return isNaN(x) ? null : x; }
+  function fmt(x, d) { return x.toLocaleString('es-CL', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function total(i) {
+    var a = n('t' + i + 'i'), b = n('t' + i + 'f'), c = n('t' + i + 'd');
+    return (a === null && b === null && c === null) ? null : (a || 0) + (b || 0) + (c || 0);
+  }
+  function minMes(i) { var a = n('t' + i + 'v'), b = n('t' + i + 'm'); return (a === null || b === null) ? null : a * b; }
+  function ahorro() {
+    var h = n('dhoy'), f = n('dflujo'), x = n('dveces');
+    if (h === null || f === null || x === null) return null;
+    return { m: (h - f) * x, h: (h - f) * x / 60, ambar: h > 0 && f < 0.2 * h };
+  }
+  function calc() {
+    [1, 2].forEach(function (i) {
+      var t = total(i); document.getElementById('tot' + i).textContent = t === null ? '' : String(t);
+      var m = minMes(i); document.getElementById('mm' + i).textContent = m === null ? '—' : fmt(m, 0) + ' minutos';
+    });
+    var a = ahorro();
+    document.getElementById('ahm').textContent = a ? fmt(a.m, 0) + ' minutos' : '—';
+    document.getElementById('ahh').textContent = a ? fmt(a.h, 1) + ' horas' : '—';
+    document.getElementById('ambar').hidden = !(a && a.ambar);
+  }
+  calc();
+
+  function flash(b, msg, ok) {
+    var t = b.getAttribute('data-label');
+    b.textContent = msg; if (ok) b.classList.add('ok');
+    setTimeout(function () { b.textContent = t; b.classList.remove('ok'); }, 1600);
+  }
+  function copy(b, text) {
+    var done = function () { flash(b, 'Copiado', true); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+    } else { fallback(text); done(); }
+  }
+  function fallback(text) {
+    var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+    ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta);
+  }
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.id === 'copygen') {
+        copy(b, document.getElementById('gen').textContent + '\n' + (state.desc || ''));
+      } else {
+        copy(b, b.parentNode.querySelector('pre').textContent);
+      }
+    });
+  });
+
+  document.getElementById('dl').addEventListener('click', function () {
+    var L = [];
+    L.push('Curso de IA para Tulsa. Sesión 6. Mi caso', '');
+    L.push('PRÁCTICA 1. PRIORIZAR SUS DOS TAREAS');
+    [1, 2].forEach(function (i) {
+      var t = total(i), m = minMes(i);
+      L.push('Tarea ' + i + '. ' + v('t' + i) + ' | Veces al mes ' + v('t' + i + 'v') + ' | Minutos cada vez ' + v('t' + i + 'm') +
+        ' | Impacto ' + v('t' + i + 'i') + ' | Frecuencia ' + v('t' + i + 'f') + ' | Dato ' + v('t' + i + 'd') +
+        ' | Total ' + (t === null ? '' : t) + ' | Minutos al mes ' + (m === null ? '' : fmt(m, 0)));
+    });
+    L.push('Elijo la tarea ' + v('elijo') + '. Por qué. ' + v('porque'), '');
+    L.push('PRÁCTICA 2. PARTE A. EL FLUJO DE SU CASO');
+    for (var i = 1; i <= 8; i++) {
+      L.push(i + '. ' + v('a' + i + 'q') + ' | ' + v('a' + i + 'w') + ' | ' + v('a' + i + 'd') + ' | ' + v('a' + i + 'c') + ' | ' + v('a' + i + 'i'));
+    }
+    L.push('', 'PARTE B. EL CASO FICTICIO EQUIVALENTE');
+    L.push('Descripción del documento real.', v('desc'));
+    L.push('Caso ficticio.', v('ficticio'));
+    L.push('Revisé que no tiene nada real. ' + (state.revise === '1' ? 'Sí' : 'No'), '');
+    L.push('PARTE C. LA PRUEBA DE PRINCIPIO A FIN');
+    for (var j = 1; j <= 6; j++) {
+      L.push(j + '. ' + v('c' + j + 'p') + ' | ' + v('c' + j + 'f') + ' | ' + v('c' + j + 'q'));
+    }
+    var a = ahorro();
+    L.push('', 'PARTE D. EL AHORRO');
+    L.push('Minutos que toma hoy. ' + v('dhoy'));
+    L.push('Minutos con el flujo, contando la revisión. ' + v('dflujo'));
+    L.push('Veces al mes. ' + v('dveces'));
+    L.push('Ahorro al mes, en minutos. ' + (a ? fmt(a.m, 0) : ''));
+    L.push('Ahorro al mes, en horas. ' + (a ? fmt(a.h, 1) : ''));
+    var blob = new Blob([L.join('\n')], { type: 'text/plain;charset=utf-8' });
+    var el = document.createElement('a'); el.href = URL.createObjectURL(blob); el.download = 'Sesion_06_Mi_caso.txt';
+    document.body.appendChild(el); el.click(); document.body.removeChild(el);
+  });
+  document.getElementById('pr').addEventListener('click', function () { window.print(); });
+  var clr = document.getElementById('clr'), armed = false;
+  clr.addEventListener('click', function () {
+    if (!armed) { armed = true; clr.textContent = 'Confirmar borrado'; setTimeout(function () { armed = false; clr.textContent = 'Borrar lo anotado'; }, 4000); return; }
+    armed = false; clr.textContent = 'Borrar lo anotado';
+    state = {}; try { localStorage.removeItem(KEY); } catch (e) {}
+    document.querySelectorAll('[data-k]').forEach(function (el) { if (el.type === 'checkbox') el.checked = false; else el.value = ''; });
+    calc();
+  });
+})();
+</script>
+</body>
+</html>
