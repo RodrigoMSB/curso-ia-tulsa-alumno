@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Laboratorio de la sesión 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1F3A5F; --ink: #1B2433; --muted: #5B6270; --rust: #8C4A22; --rust-l: #C8702A;
+  --paper: #F7F5F0; --line: #D9D3C7; --card: #FFFFFF; --user: #E6ECF3;
+  --red: #A8322D; --amber: #C98A1B; --green: #3E7B4F;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+header.top { background: var(--navy); color: #fff; padding: 28px 16px 32px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+header.top .wrap { padding: 0; }
+.brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.brand .logo { background: #fff; border-radius: 10px; padding: 6px 12px; display: inline-flex; }
+.brand img { height: 40px; display: block; }
+.eye { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; color: #E7A774; }
+h1 { font-family: Lora, serif; font-weight: 500; font-size: clamp(28px, 5vw, 40px); line-height: 1.2; margin: 8px 0 10px; }
+header.top p { color: #DCE3EC; margin: 0; max-width: 680px; }
+nav.toc { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; }
+nav.toc a { white-space: nowrap; text-decoration: none; color: var(--navy); font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--user); }
+nav.toc a:hover { background: #D3DDEA; }
+main { padding: 28px 0 60px; }
+section.block { margin-bottom: 40px; scroll-margin-top: 64px; }
+h2 { font-family: Lora, serif; font-weight: 600; font-size: 26px; color: var(--ink); margin: 0 0 6px; }
+h3 { font-size: 18px; color: var(--navy); margin: 26px 0 8px; }
+.kicker { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--rust); font-weight: 600; margin-bottom: 4px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.note { background: #FBF1E6; border: 1px solid #EBCFB2; border-radius: 12px; padding: 14px 18px; margin: 14px 0; }
+.step { display: flex; gap: 14px; margin: 16px 0; }
+.step .n { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-top: 2px; }
+.step .body { flex: 1; min-width: 0; }
+.step p { margin: 0 0 6px; }
+.prompt { position: relative; background: var(--user); border: 1px solid #C9D4E2; border-radius: 12px; padding: 16px 18px 16px; margin: 10px 0; }
+.prompt .lab { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.prompt pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.prompt.kit pre { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14.5px; }
+.copy { margin-top: 12px; border: 0; background: var(--navy); color: #fff; font: 600 14px Inter, sans-serif; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.copy:hover { background: #2A4C78; }
+.copy.ok { background: var(--green); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+th { background: var(--navy); color: #fff; text-align: left; padding: 9px 10px; font-weight: 600; }
+td { border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+.tablewrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+td input, td select, td textarea { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+td textarea { resize: vertical; min-height: 38px; }
+ol.ways { padding-left: 22px; margin: 8px 0; }
+ol.ways li { margin-bottom: 6px; }
+.armador .head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.armador .head b { font-size: 17px; color: var(--navy); }
+.field { margin: 10px 0; }
+.field label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.field textarea, .field select, .field input { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 8px; font: 15px Inter, sans-serif; background: #FDFCFA; color: var(--ink); }
+.field textarea { resize: vertical; min-height: 44px; }
+.field select { width: auto; min-width: 150px; }
+.save { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn2 { border: 1px solid var(--navy); background: #fff; color: var(--navy); font: 600 15px Inter, sans-serif; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.btn2.primary { background: var(--navy); color: #fff; }
+.small { font-size: 14px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 20px 0 40px; font-size: 13px; color: var(--muted); }
+a { color: var(--navy); }
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.file { display: flex; flex-direction: column; gap: 2px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--ink); }
+.file:hover { border-color: var(--navy); }
+.file b { font-size: 15px; }
+.file span { font-size: 13px; color: var(--muted); }
+.file .dl { color: var(--navy); font-weight: 600; font-size: 13px; margin-top: 4px; }
+details.fold { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; margin: 14px 0; }
+details.fold summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+.rot { margin-top: 30px; }
+.field select { max-width: 100%; }
+@media print { nav.toc, .copy, .save { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="logo"><img src="../logo_caphome.png" alt="CapHome"></span></div>
+    <div class="eye">Sesión 4 · Laboratorio</div>
+    <h1>Instrucciones avanzadas y verificación</h1>
+    <p>Esta página es su espacio de trabajo durante la sesión. Cada instrucción tiene un botón para copiarla.</p>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#inicio">Antes de empezar</a>
+  <a href="#archivos">Archivos</a>
+  <a href="#ideas">Tres ideas</a>
+  <a href="#p1">Práctica 1</a>
+  <a href="#verificar">Verificar</a>
+  <a href="#p2">Práctica 2</a>
+  <a href="#tarea">Para la sesión 5</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="block" id="inicio">
+  <div class="kicker">Antes de empezar</div>
+  <h2>Cómo trabajar en esta página</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Abra la herramienta que prefiera, con su sesión iniciada.</p></div></div>
+  <div class="step"><div class="n">2</div><div class="body"><p>Tenga a mano el archivo de la sesión 3 con sus tres instrucciones.</p></div></div>
+  <div class="step"><div class="n">3</div><div class="body"><p>Lo que anote se guarda en este navegador. Al final descargue su biblioteca.</p></div></div>
+  <div class="note"><b>Nota.</b> El manual y el registro son ficticios y se pueden subir. La práctica sube dos archivos. ChatGPT gratuito permite tres subidas por día.</div>
+</section>
+
+<section class="block" id="archivos">
+  <div class="kicker">Archivos</div>
+  <h2>Archivos de la sesión</h2>
+  <div class="files">
+    <a class="file" href="kit/S4-K01_Manual_Sensor_HM-40.pdf" download><b>S4-K01 Manual del sensor HM-40</b><span>PDF</span><span class="dl">Descargar</span></a>
+    <a class="file" href="../sesion-02/kit/S2-K01_Detenciones_octubre.xlsx" download><b>S2-K01 Detenciones de octubre</b><span>Excel</span><span class="dl">Descargar</span></a>
+    <a class="file" href="../sesion-02/kit/S2-K01_Detenciones_octubre.csv" download><b>S2-K01 Detenciones de octubre</b><span>CSV</span><span class="dl">Descargar</span></a>
+  </div>
+  <details class="fold"><summary>Texto del manual para copiar</summary>
+    <div class="prompt kit"><pre id="manual"># Sensórica Andalién SpA
+
+## Sensor de humedad de chapa HM-40. Manual de operación y mantenimiento
+
+Edición 3, marzo de 2024. Documento ficticio, creado para el curso de IA para Tulsa.
+
+---
+
+### 1. Descripción
+
+El HM-40 mide sin contacto la humedad de la chapa de madera a la salida del secador. Funciona por absorción de luz infrarroja cercana. Una ventana óptica de vidrio protege el emisor y el receptor. La señal sale por un cable apantallado de 4 a 20 mA hacia el controlador del secador.
+
+### 2. Especificaciones
+
+| Parámetro | Valor |
+|---|---|
+| Rango de medición | 2 a 30 por ciento de humedad en base seca |
+| Exactitud | Más o menos 0,5 puntos entre 4 y 15 por ciento |
+| Distancia de trabajo | 250 a 350 mm sobre la chapa |
+| Temperatura máxima en el punto de montaje | 85 °C. Sobre ese valor la lectura se vuelve inestable |
+| Grado de protección | IP65 |
+| Vida útil esperada | 3 años o 15.000 horas de operación, lo que ocurra primero |
+
+### 3. Instalación
+
+3.1. Monte el sensor perpendicular a la chapa, a la distancia de trabajo indicada en la sección 2.
+
+3.2. No lo monte frente a la salida directa de vapor del secador.
+
+3.3. Separe el cable de señal al menos 30 cm de los cables de motores y variadores de frecuencia. La interferencia eléctrica produce saltos bruscos en la lectura.
+
+3.4. Después de una detención de más de 8 horas, espere 30 minutos de precalentamiento antes de dar por válida la lectura. En ese lapso puede condensarse humedad en la ventana óptica.
+
+### 4. Calibración
+
+4.1. Calibre el sensor cada 500 horas de operación con la placa patrón entregada con el equipo.
+
+4.2. Registre cada calibración con fecha, valor antes y valor después.
+
+### 5. Mantenimiento
+
+5.1. Revise cada semana que la ventana óptica no tenga fisuras.
+
+5.2. Limpie la ventana óptica cada 72 horas de operación cuando se mida chapa de pino con resina. Use un paño seco que no deje pelusa. No use solventes.
+
+5.3. La recalibración corrige la deriva electrónica del sensor. No corrige la contaminación de la ventana óptica, la condensación ni la interferencia eléctrica. Si la lectura irregular vuelve después de recalibrar, revise esas causas antes de calibrar otra vez.
+
+### 6. Diagnóstico de fallas
+
+| Síntoma | Causa posible | Qué hacer | Sección |
+|---|---|---|---|
+| Lectura irregular que vuelve después de recalibrar | Ventana óptica contaminada con resina o polvo de madera | Limpiar la ventana | 5.2 |
+| Lectura irregular en la primera media hora después de una detención larga | Condensación en la ventana óptica | Respetar el precalentamiento | 3.4 |
+| Saltos bruscos de lectura | Interferencia eléctrica en el cable de señal | Separar el cable | 3.3 |
+| Lectura inestable con el secador a plena carga | Temperatura en el punto de montaje sobre 85 °C | Medir la temperatura y reubicar o agregar pantalla térmica | 2 |
+| Lectura irregular que no mejora con ninguna de las acciones anteriores | Fin de la vida útil del emisor | Reemplazar el sensor | 6.4 |
+
+6.4. Si el sensor superó su vida útil, o si las causas anteriores se descartaron, reemplácelo. Un sensor nuevo requiere calibración inicial según la sección 4.1.
+
+### 7. Garantía y soporte
+
+7.1. La garantía es de 12 meses desde la entrega.
+
+7.2. Para soporte técnico escriba al área de servicio de Sensórica Andalién SpA indicando el número de serie del equipo.</pre><button class="copy" data-label="Copiar texto">Copiar texto</button></div>
+  </details>
+</section>
+
+<section class="block" id="ideas">
+  <div class="kicker">Tres ideas</div>
+  <h2>Tres ideas</h2>
+  <ol class="ways">
+    <li><b>Encadenar.</b> Una tarea larga se divide en pasos y cada paso usa el resultado del anterior. Así se revisa cada paso antes de seguir, y si uno falla se corrige ese y no todo.</li>
+    <li><b>Razonar paso a paso.</b> Pedir que muestre el cálculo o el razonamiento sirve para ver de dónde salió el número y poder comprobarlo.</li>
+    <li><b>El documento como fuente.</b> Se le pide que use solo ese documento, que cite la parte que sostiene cada afirmación y que diga cuando algo no está.</li>
+  </ol>
+  <div class="note">El documento también pasa por el semáforo. Un manual público del fabricante es verde. Un procedimiento interno de la planta, no.</div>
+</section>
+
+<section class="block" id="p1">
+  <div class="kicker">Práctica 1 · Individual · 30 minutos</div>
+  <h2>La cadena del sensor</h2>
+  <p>Descargue S4-K01, el manual en PDF, y S2-K01, el registro de detenciones de octubre.</p>
+
+  <h3>Paso 1. Lo que dice el manual</h3>
+  <p>Suba el manual y copie esta instrucción.</p>
+  <div class="prompt"><div class="lab">Paso 1</div><pre>Te adjunto el manual del sensor de humedad HM-40 de nuestro secador 2. El sensor dio lectura de humedad irregular 26 veces en octubre y cada vez se recalibró.
+Según el manual, ¿cuáles son las causas posibles de una lectura irregular que vuelve después de recalibrar?
+Para cada causa indica la sección del manual que lo dice, con una cita textual breve.
+Usa solo el manual. Si algo no está en el manual, dilo y no lo completes con conocimiento general.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <p>Compruebe las citas. Abra el PDF, busque con Ctrl F, o Cmd F en Mac, una frase de cada cita.</p>
+  <div class="tablewrap"><table>
+    <tr><th style="width:44%">Causa</th><th style="width:26%">Sección que dio</th><th>¿Encontré la cita?</th></tr>
+    <tr><td><input data-k="c1" aria-label="Causa 1"></td><td><input data-k="s1" aria-label="Sección 1"></td><td><select data-k="f1" aria-label="¿Encontré la cita? 1"><option value=""></option><option>Sí</option><option>No</option></select></td></tr><tr><td><input data-k="c2" aria-label="Causa 2"></td><td><input data-k="s2" aria-label="Sección 2"></td><td><select data-k="f2" aria-label="¿Encontré la cita? 2"><option value=""></option><option>Sí</option><option>No</option></select></td></tr><tr><td><input data-k="c3" aria-label="Causa 3"></td><td><input data-k="s3" aria-label="Sección 3"></td><td><select data-k="f3" aria-label="¿Encontré la cita? 3"><option value=""></option><option>Sí</option><option>No</option></select></td></tr><tr><td><input data-k="c4" aria-label="Causa 4"></td><td><input data-k="s4" aria-label="Sección 4"></td><td><select data-k="f4" aria-label="¿Encontré la cita? 4"><option value=""></option><option>Sí</option><option>No</option></select></td></tr><tr><td><input data-k="c5" aria-label="Causa 5"></td><td><input data-k="s5" aria-label="Sección 5"></td><td><select data-k="f5" aria-label="¿Encontré la cita? 5"><option value=""></option><option>Sí</option><option>No</option></select></td></tr>
+  </table></div>
+
+  <h3>Paso 2. Lo que muestra el registro</h3>
+  <p>En la misma conversación, suba el registro y copie esta instrucción.</p>
+  <div class="prompt"><div class="lab">Paso 2</div><pre>Ahora te adjunto el registro de detenciones de octubre. Considera solo las fallas de sensor del Secador 2, que en el registro aparece escrito de tres formas.
+Muestra paso a paso en qué turnos y qué días de la semana ocurren, con el conteo de cada uno.
+Para cada causa del paso anterior, dime si el registro la apoya, la descarta o no permite saberlo, y por qué.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <p>Compruebe el conteo de un turno. En Excel, filtre Equipo con las tres formas del Secador 2, Tipo de falla en Sensor y Turno en A. Seleccione las celdas de Minutos sin el título y lea Recuento y Suma en la barra inferior.</p>
+  <div class="card">
+    <div class="field"><label>Lo que dijo la herramienta del turno A</label><textarea data-k="p2h" style="min-height:60px"></textarea></div>
+    <div class="field"><label>Lo que dio Excel</label><textarea data-k="p2x" style="min-height:60px"></textarea></div>
+    <div class="field"><label>¿Dio por hecho algo que el registro no muestra?</label><textarea data-k="p2s" style="min-height:60px"></textarea></div>
+  </div>
+
+  <h3>Paso 3. El plan</h3>
+  <div class="prompt"><div class="lab">Paso 3</div><pre>Con lo anterior, propón un plan de revisión para la reunión de mantención. Tres acciones en orden, cada una con la causa que confirma o descarta, la sección del manual en que se apoya y quién debería hacerla, según el cargo.
+No incluyas acciones que no se apoyen en el manual o en el registro.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <div class="card"><div class="field"><label>Pegue aquí el plan</label><textarea data-k="p3" style="min-height:160px"></textarea></div></div>
+</section>
+
+<section class="block" id="verificar">
+  <div class="kicker">Verificar</div>
+  <h2>Cómo se verifica una respuesta</h2>
+  <ol class="ways">
+    <li><b>Cifras.</b> ¿De dónde sale cada número? Si sale del documento, se busca. Si sale de un cálculo, se rehace.</li>
+    <li><b>Fuentes.</b> ¿La cita existe y dice lo que la herramienta afirma?</li>
+    <li><b>Supuestos.</b> ¿Dio por hecho algo que nadie le dijo?</li>
+    <li><b>Cálculos.</b> ¿El cálculo está bien hecho? Se rehace en Excel o con la calculadora.</li>
+  </ol>
+  <div class="note">Se le puede pedir a la herramienta que haga la lista de lo que hay que verificar. No se le puede pedir que se verifique a sí misma y darlo por bueno.</div>
+</section>
+
+<section class="block" id="p2">
+  <div class="kicker">Práctica 2 · Individual · 46 minutos</div>
+  <h2>Su biblioteca</h2>
+  <p>Cada instrucción de su biblioteca lleva esta ficha.</p>
+  <div class="tablewrap"><table>
+    <tr><th style="width:30%">Campo</th><th>Qué se anota</th></tr>
+    <tr><td><b>Nombre</b></td><td>Un nombre corto para encontrarla</td></tr>
+    <tr><td><b>Para qué sirve</b></td><td>La tarea y el resultado</td></tr>
+    <tr><td><b>Qué datos admite</b></td><td>El color del semáforo de lo que se le puede entregar</td></tr>
+    <tr><td><b>Cuándo la probé</b></td><td>Fecha y herramienta</td></tr>
+    <tr><td><b>Qué le corregí</b></td><td>Lo que cambió después de probarla</td></tr>
+    <tr><td><b>Instrucción</b></td><td>El texto completo</td></tr>
+  </table></div>
+
+  <h3 class="rot">Parte A. Las tres de la sesión 3, 10 minutos</h3>
+  <p>Pase a fichas sus tres instrucciones de la sesión 3.</p>
+  <div id="f1"></div><div id="f2"></div><div id="f3"></div>
+
+  <h3 class="rot">Parte B. Una cadena para su tarea, 20 minutos</h3>
+  <p>Arme una cadena de dos o tres pasos para la tarea principal de su caso, con un documento público o ficticio como fuente si lo necesita. Pruébela con un ejemplo ficticio. Es la cuarta instrucción.</p>
+  <div id="f4"></div>
+
+  <h3 class="rot">Parte C. El verificador, 12 minutos</h3>
+  <p>Pruebe el verificador sobre una respuesta de la parte B y compruebe una cifra o afirmación que le marque. Es la quinta.</p>
+  <div class="prompt"><div class="lab">Verificador</div><pre>Antes de que use tu respuesta anterior, haz una lista de cada cifra y cada afirmación importante que contiene.
+Para cada una indica de dónde sale. Si sale del documento, di la sección. Si sale de un cálculo, muestra el cálculo. Si es un supuesto tuyo, dilo.
+No agregues información nueva ni corrijas la respuesta. Solo haz la lista.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <div id="f5"></div>
+</section>
+
+<section class="block" id="tarea">
+  <div class="kicker">Para la sesión 5</div>
+  <h2>Antes de la próxima sesión</h2>
+  <div class="step"><div class="n">1</div><div class="body"><p>Use en su trabajo, durante la semana, al menos una instrucción de su biblioteca con un caso ficticio o anonimizado, y anote en la ficha qué tuvo que corregir.</p></div></div>
+  <div class="card">
+    <h3 style="margin-top:0">Guardar lo que anotó</h3>
+    <p class="small">Lo que escribió queda guardado en este navegador. Descárguelo para conservarlo.</p>
+    <div class="save">
+      <button class="btn2 primary" id="dl">Descargar mi biblioteca</button>
+      <button class="btn2" id="pr">Imprimir o guardar en PDF</button>
+      <button class="btn2" id="clr">Borrar lo anotado</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  Curso de IA para Tulsa · Material del participante · El manual S4-K01 y su fabricante son ficticios.
+</div></footer>
+
+<script>
+(function () {
+  var KEY = 'lab-s4-tulsa';
+  var DATOS = ['Verde', 'Amarillo anonimizado solo en herramienta contratada', 'Solo ficticio'];
+
+  [1, 2, 3, 4, 5].forEach(function (n) {
+    var p = 'f' + n;
+    var d = document.createElement('div');
+    d.className = 'card armador';
+    d.innerHTML = '<div class="head"><b>Instrucción ' + n + '</b></div>' +
+      '<div class="field"><label>Nombre</label><input data-k="' + p + 'nom"></div>' +
+      '<div class="field"><label>Para qué sirve</label><textarea data-k="' + p + 'para"></textarea></div>' +
+      '<div class="field"><label>Qué datos admite</label><select data-k="' + p + 'datos"><option value=""></option>' +
+        DATOS.map(function (o) { return '<option>' + o + '</option>'; }).join('') + '</select></div>' +
+      '<div class="field"><label>Cuándo la probé</label><input data-k="' + p + 'cuando"></div>' +
+      '<div class="field"><label>Qué le corregí</label><textarea data-k="' + p + 'corr"></textarea></div>' +
+      '<div class="field"><label>Instrucción</label><textarea data-k="' + p + 'ins" style="min-height:180px"></textarea></div>' +
+      '<button class="copy" data-ficha="' + p + '" data-label="Copiar esta instrucción">Copiar esta instrucción</button>';
+    document.getElementById(p).appendChild(d);
+  });
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+
+  document.querySelectorAll('[data-k]').forEach(function (el) {
+    var k = el.getAttribute('data-k');
+    if (state[k] != null) el.value = state[k];
+    var save = function () {
+      state[k] = el.value;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    };
+    el.addEventListener('input', save);
+    el.addEventListener('change', save);
+  });
+
+  function v(k) { return (state[k] || '').trim(); }
+
+  function flash(b, msg, ok) {
+    var t = b.getAttribute('data-label');
+    b.textContent = msg; if (ok) b.classList.add('ok');
+    setTimeout(function () { b.textContent = t; b.classList.remove('ok'); }, 1600);
+  }
+  function copy(b, text) {
+    var done = function () { flash(b, 'Copiado', true); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+    } else { fallback(text); done(); }
+  }
+  function fallback(text) {
+    var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+    ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta);
+  }
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-ficha');
+      if (f) {
+        copy(b, state[f + 'ins'] || '');
+      } else {
+        copy(b, b.parentNode.querySelector('pre').textContent);
+      }
+    });
+  });
+
+  document.getElementById('dl').addEventListener('click', function () {
+    var L = [];
+    L.push('Curso de IA para Tulsa. Sesión 4. Mi biblioteca', '');
+    [1, 2, 3, 4, 5].forEach(function (n) {
+      var p = 'f' + n;
+      L.push('INSTRUCCIÓN ' + n);
+      L.push('Nombre. ' + v(p + 'nom'));
+      L.push('Para qué sirve. ' + v(p + 'para'));
+      L.push('Qué datos admite. ' + v(p + 'datos'));
+      L.push('Cuándo la probé. ' + v(p + 'cuando'));
+      L.push('Qué le corregí. ' + v(p + 'corr'));
+      L.push('Instrucción.', v(p + 'ins'), '');
+    });
+    L.push('PRÁCTICA 1. LA CADENA DEL SENSOR');
+    L.push('Paso 1. Causa, sección que dio y si encontré la cita');
+    [1, 2, 3, 4, 5].forEach(function (i) { L.push(i + '. ' + v('c' + i) + ' | ' + v('s' + i) + ' | ' + v('f' + i)); });
+    L.push('Paso 2. Lo que dijo la herramienta del turno A. ' + v('p2h'));
+    L.push('Lo que dio Excel. ' + v('p2x'));
+    L.push('¿Dio por hecho algo que el registro no muestra? ' + v('p2s'));
+    L.push('Paso 3. El plan.', v('p3'));
+    var blob = new Blob([L.join('\n')], { type: 'text/plain;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Sesion_04_Mi_biblioteca.txt';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  });
+  document.getElementById('pr').addEventListener('click', function () { window.print(); });
+  var clr = document.getElementById('clr'), armed = false;
+  clr.addEventListener('click', function () {
+    if (!armed) { armed = true; clr.textContent = 'Confirmar borrado'; setTimeout(function () { armed = false; clr.textContent = 'Borrar lo anotado'; }, 4000); return; }
+    armed = false; clr.textContent = 'Borrar lo anotado';
+    state = {}; try { localStorage.removeItem(KEY); } catch (e) {}
+    document.querySelectorAll('[data-k]').forEach(function (el) { el.value = ''; });
+  });
+})();
+</script>
+</body>
+</html>
