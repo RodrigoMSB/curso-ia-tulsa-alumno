@@ -231,9 +231,14 @@ Para cada causa del paso anterior, dime si el registro la apoya, la descarta o n
   </div>
 
   <h3>Paso 3. El plan</h3>
-  <div class="prompt"><div class="lab">Paso 3</div><pre>Con lo anterior, propón un plan de revisión para la reunión de mantención. Tres acciones en orden, cada una con la causa que confirma o descarta, la sección del manual en que se apoya y quién debería hacerla, según el cargo.
-No incluyas acciones que no se apoyen en el manual o en el registro.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
+  <div class="prompt"><div class="lab">Paso 3</div><pre>Con lo anterior, propón un plan de revisión para la reunión de mantención. Tres acciones en orden, cada una con la causa que confirma o descarta y la sección del manual en que se apoya.
+No incluyas acciones que no se apoyen en el manual o en el registro.
+Deja una columna Responsable en blanco. La completo yo en la reunión.</pre><button class="copy" data-label="Copiar instrucción">Copiar instrucción</button></div>
   <div class="card"><div class="field"><label>Pegue aquí el plan</label><textarea data-k="p3" style="min-height:160px"></textarea></div></div>
+  <div class="tablewrap"><table>
+    <tr><th style="width:62%">Acción</th><th>Responsable</th></tr>
+    <tr><td><input data-k="a1" aria-label="Acción 1"></td><td><input data-k="r1" aria-label="Responsable 1"></td></tr><tr><td><input data-k="a2" aria-label="Acción 2"></td><td><input data-k="r2" aria-label="Responsable 2"></td></tr><tr><td><input data-k="a3" aria-label="Acción 3"></td><td><input data-k="r3" aria-label="Responsable 3"></td></tr>
+  </table></div>
 </section>
 
 <section class="block" id="verificar">
@@ -383,6 +388,8 @@ No agregues información nueva ni corrijas la respuesta. Solo haz la lista.</pre
     L.push('Lo que dio Excel. ' + v('p2x'));
     L.push('¿Dio por hecho algo que el registro no muestra? ' + v('p2s'));
     L.push('Paso 3. El plan.', v('p3'));
+    L.push('Acción y responsable');
+    [1, 2, 3].forEach(function (i) { L.push(i + '. ' + v('a' + i) + ' | ' + v('r' + i)); });
     var blob = new Blob([L.join('\n')], { type: 'text/plain;charset=utf-8' });
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Sesion_04_Mi_biblioteca.txt';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
